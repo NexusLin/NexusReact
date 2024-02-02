@@ -1,30 +1,63 @@
+
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 一、reactltb项目信息
+—————————————————————————————————————————————————————————
+### 项目目录以及文件夹含义介绍
+public              公共资源
+    index.html        首页
+    mainfest.json     pwa应用的元数据
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+src                 项目源码
+    assets            资源（图片,字体图标）
+    componenets       公共组件
+    pages             页面
+    utils             工具
+    app.js            项目根组件
+    index.css         局样式
+    index.js          项目入口文件（渲染根组件、导入组件库等）
+    app.test.js       app组件测试文件
+    serviceWorker.js  用来实现PWA(可选)
+—————————————————————————————————————————————————————————
+### 项目环境
 
-## Expanding the ESLint configuration
+node v20.11.0
+react 18.2
+react-dom  18.2.0
+—————————————————————————————————————————————————————————
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## 二、项目搭建和配置
+——————————————————————————————————————————————————————————————
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. 项目搭建创建
+yarn create vite ltbreact --template react-js (推荐，去ts化)
+yarn create vite ltbreact --template react-ts  //node大于20.0.0 才可以使用
+
+——————————————————————————————————————————————————————————————
+
+2. 项目配置路径别名
+
+配置resolve.alias 文件导入路径别名 (vite.config.js中) (vite.config.js中)
+src 默认src下src文件中
+components 默认src下components中
+————————————————————————
+
+配置路径别名路径提示 (修改tsconfig.json )
+
+————————————————————————————————————————————————————————————————————————
+
+3. 安装axios并封装请求
+yarn add axios
+
+
+
+
+4. 集成 react-router 路由
+yarn add react-router-dom
+
+————————————————————————————————————————————————————————————————————————
+ -->
+
