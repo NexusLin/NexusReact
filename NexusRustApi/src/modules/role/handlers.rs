@@ -67,8 +67,10 @@ pub async fn post_add(
     data.insert("role_key".to_string(), form.role_key.clone());
     data.insert("role_sort".to_string(), form.role_sort.to_string());
     data.insert("status".to_string(), form.status.clone());
-    data.insert("remark".to_string(), form.remark.clone());
-
+    if let Some(remark) = &form.remark {
+        data.insert("remark".to_string(), remark.clone());
+    }
+    
      // 处理布尔值字段
      data.insert("menu_check_strictly".to_string(), if form.menu_check_strictly { "1" } else { "0" }.to_string());
      data.insert("dept_check_strictly".to_string(), if form.dept_check_strictly { "1" } else { "0" }.to_string());

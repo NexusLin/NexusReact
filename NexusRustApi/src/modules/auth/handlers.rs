@@ -2,10 +2,7 @@
 use actix_web::{web, HttpRequest, HttpResponse, Responder};
 
 #[allow(unused_imports)]
-// use sqlx::{MySqlPool, Row}; // 添加 Row trait
-
-#[allow(unused_imports)]
-use sqlx::{MySqlPool,MySql, Pool};
+use sqlx::{MySqlPool, Row, Pool,MySql}; // 添加 Row trait
 
 #[allow(unused_imports)]
 use crate::common::response::ApiResponse; // 导入 ApiResponse 模型
@@ -200,6 +197,7 @@ fn build_menu_tree(menus: Vec<Menu>) -> Vec<MenuItem> {
     root_menus
 }
 
+// Token换取路由信息
 pub async fn get_routers(
     req: HttpRequest,
     pool: web::Data<MySqlPool>
@@ -213,8 +211,6 @@ pub async fn get_routers(
             data: None::<()>,
         }),
     };
-    print!("token: {}", token);
-
 
     // 校验 token
     let token_data = match decode::<Claims>(
@@ -224,7 +220,6 @@ pub async fn get_routers(
     ) {
         Ok(data) => {
             // 打印解码后的 token 信息
-            println!("Token 解码成功: {:?}", data.claims);
             data
         },
         Err(_) => return HttpResponse::Unauthorized().json(ApiResponse {
@@ -244,7 +239,7 @@ pub async fn get_routers(
     {
         Ok(data) => {
             // 打印解码后的 token 信息
-            println!("User解码=====: {:?}", data.user_id);
+            // println!("User解码=====: {:?}", data.user_id);
             data
         },
         Err(_) => return HttpResponse::Unauthorized().json(ApiResponse {
@@ -282,7 +277,6 @@ pub async fn get_routers(
     // 收集所有角色ID
     let role_ids: Vec<i32> = roles.iter().map(|role| role.role_id).collect();
   
-   
     // 查询这些角色对应的菜单ID
     let menu_ids: Vec<i32> = if role_ids.is_empty() {
         Vec::new() // 如果没有角色，返回空数组

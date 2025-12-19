@@ -5,6 +5,7 @@ pub mod dict; //字典
 pub mod menu; // 菜单
 pub mod auth; //权限
 pub mod dept; // 部门
+pub mod setting; // 系统设置
 pub mod notice; // 通知
 pub mod job; // 职位
 pub mod article; // 文章

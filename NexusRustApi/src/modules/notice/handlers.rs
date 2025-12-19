@@ -97,3 +97,9 @@ pub async fn del_delete(pool: web::Data<MySqlPool>, id: web::Path<i32>) -> HttpR
     )
     .await
 }
+
+// 导出通告模板-通用导出
+pub async fn export_template() -> HttpResponse {
+    let headers = vec!["标题", "类型", "内容"];
+    crate::common::excelmethods::export_excel_template(headers, "notice_template.xlsx").await
+}

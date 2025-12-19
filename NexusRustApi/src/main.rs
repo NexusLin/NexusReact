@@ -4,9 +4,6 @@ use actix_web::{App, HttpServer, Responder,HttpResponse,web,http::header};
 use dotenv::dotenv;
 use sqlx::MySqlPool;
 use std::env;
-
-// use std::net::SocketAddr; // 服务器地址
-
 use log::{info}; //debug, warn, error
 use env_logger::Builder; //初始化日志
 
@@ -14,6 +11,8 @@ use env_logger::Builder; //初始化日志
 pub mod common;
 pub mod modules;
 pub mod database;
+pub mod hooks; //公共方法模块
+pub mod config; //设置模块
 
 // 文件服务
 use actix_files as fs;
@@ -39,6 +38,8 @@ async fn welcome() -> impl Responder {
         .body(welcome_msg)
 }
 
+// 获取系统前缀
+use crate::config::websetting::routes::SYSTEM_PREFIX;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -107,29 +108,40 @@ async fn main() -> std::io::Result<()> {
             .wrap(cors)
             // 2. 注入数据库连接池
             .app_data(web::Data::new(pool.clone()))
-            // 3. 注册模块路由加前缀
+            // 3. 注册模块路由加前缀 静态文件目录-图片
             .service(
                 fs::Files::new("/uploads/images", "./uploads/images")
                     .prefer_utf8(true)
                     .show_files_listing() // 开发环境使用，生产环境应移除
             )
-            // 可以添加其他静态文件目录
+            // 静态文件目录-文档
             .service(
                 fs::Files::new("/uploads/documents", "./uploads/documents")
+            )
+            // 静态文件目录-视频
+            .service(
+                fs::Files::new("/uploads/videos", "./uploads/videos")
             )
             .service(
                 web::scope(&base_url_prefix) // 使用环境变量中的前缀
                     .route("", web::get().to(welcome))  // 添加空路径路由
                     .route("/", web::get().to(welcome))  // 添加根路径路由
-                    .configure(modules::user::routes::config)  // 用户模块
-                    .configure(modules::upload::routes::config) // 上传模块
-                    .configure(modules::role::routes::config) // 角色模块
-                    .configure(modules::dict::routes::config) // 字典模块
-                    .configure(modules::menu::routes::config) // 菜单模块
+                    // 系统管理相关
+                    .service(
+                        web::scope(SYSTEM_PREFIX)
+                        .configure(modules::user::routes::config) // 用户模块
+                        .configure(modules::role::routes::config) // 角色模块
+                        .configure(modules::dict::routes::config) // 字典模块
+                        .configure(modules::menu::routes::config) // 菜单模块
+                        .configure(modules::dept::routes::config) // 部门模块
+                        .configure(modules::notice::routes::config) // 通知模块
+                    )
                     .configure(modules::auth::routes::config) // 权限模块
-                    .configure(modules::dept::routes::config) // 部门模块
-                    .configure(modules::notice::routes::config) // 通知模块
+                    .configure(modules::upload::routes::config) // 上传模块
+                    .configure(modules::setting::routes::config) // 设置模块
+                    .configure(modules::article::routes::config) // 文章模块
                     .configure(modules::job::routes::config) //职位模块
+                    
             )
             // 3. 注册路由
             .route("/", web::get().to(welcome))

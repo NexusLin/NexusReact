@@ -122,7 +122,13 @@ fn camel_to_snake (field: &str) -> String {
     }
 }
 
-
+//转换参数false到数据库为1，true到数据库为0
+pub async fn bool_option_to_string(value: Option<bool>) -> String {
+    match value {
+        Some(true) => "0".to_string(),
+        Some(false) | None => "1".to_string(),
+    }
+}
 
 #[allow(dead_code)]
 // 公共查询方法
@@ -143,7 +149,7 @@ pub async fn list_api(
     let query = query.unwrap(); // 如果传入查询语句
 
     // 输出日志帮助调试（可选）
-    println!("执行的查询: {}", query);
+    // println!("执行的查询: {}", query);
 
     // 使用 SQLx 提供的 `query` 来执行查询，不进行结构体映射
     let rows = sqlx::query(query).fetch_all(pool).await?;
@@ -614,7 +620,7 @@ pub async fn delete_api(
     soft_delete: bool, // 新增参数，true=软删除，false=真删除
 ) -> HttpResponse {
     let sql;
-    let mut query;
+    let query;
 
     if soft_delete {
         // 假删除，isDeleted 字段置为 1

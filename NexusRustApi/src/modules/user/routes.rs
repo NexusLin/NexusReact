@@ -1,46 +1,24 @@
 
-// use serde::Serialize;
-// modules/user/routes.rs
 use actix_web::web;
-// use actix_web::{HttpResponse, Responder};
-
-// #[derive(Serialize)]
-// pub struct SimpleRes {
-//     pub code: i32,
-//     pub msg: &'static str,
-// }
-
-// pub async fn register_users() -> impl Responder {
-//     HttpResponse::Ok().json(SimpleRes {
-//         code: 200,
-//         msg: "注册成功",
-//     })
-// }
- // cfg.route("/register", web::post().to(register_users));
-
-
 pub fn config(cfg: &mut web::ServiceConfig) {
-
-  cfg.route("/register", web::post().to(crate::modules::user::handlers::register_users));
-
-  cfg.route("/login", web::post().to(crate::modules::user::handlers::login_users));
-
-  cfg.route("/getInfo", web::get().to(crate::modules::user::handlers::get_info));
-
-  cfg.route("/system/users", web::get().to(crate::modules::user::handlers::get_all_users));
-  cfg.route("/system/users", web::post().to(crate::modules::user::handlers::post_add_users));
-  cfg.route("/system/users/{id}", web::get().to(crate::modules::user::handlers::get_user_detail));
-  cfg.route("/system/users", web::put().to(crate::modules::user::handlers::put_update_users));
-  cfg.route("/system/users/{id}", web::delete().to(crate::modules::user::handlers::delete_user));
-
-  // 导出数据
-  cfg.route("/system/users/export", web::post().to(crate::modules::user::handlers::export_users));
+//   cfg.route("/register", web::post().to(crate::modules::user::handlers::register_users));
+//   cfg.route("/login", web::post().to(crate::modules::user::handlers::login_users));
+//   cfg.route("/logout", web::post().to(crate::modules::user::handlers::logout_users));
+//   cfg.route("/getInfo", web::get().to(crate::modules::user::handlers::get_info));
+  cfg.route("/users", web::get().to(crate::modules::user::handlers::get_all_users));
+  cfg.route("/users", web::post().to(crate::modules::user::handlers::post_add_users));
+  cfg.route("/users/{id}", web::get().to(crate::modules::user::handlers::get_user_detail));
+  cfg.route("/users", web::put().to(crate::modules::user::handlers::put_update_users));
+  cfg.route("/users/{id}", web::delete().to(crate::modules::user::handlers::delete_user));
 
   // 导出模板
-  cfg.route("/system/users/exporttemplate", web::post().to(crate::modules::user::handlers::export_users_template));
+  cfg.route("/users/exporttemplate", web::post().to(crate::modules::user::handlers::export_template));
+
+  // 导出数据
+  cfg.route("/users/export", web::post().to(crate::modules::user::handlers::export_users_data));
 
   // 导入数据
-  cfg.route("/system/users/import", web::post().to(crate::modules::user::handlers::import_users));
+  cfg.route("/users/import", web::post().to(crate::modules::user::handlers::import_users_data));
 }
 
 

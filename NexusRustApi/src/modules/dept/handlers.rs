@@ -50,9 +50,9 @@ pub async fn get_list(
     filter: Option<web::Query<HashMap<String, String>>>,
 ) -> impl Responder {
     // 调试：打印查询参数
-    if let Some(ref filter_params) = filter {
-        println!("查询参数: {:?}", filter_params);
-    }
+    // if let Some(filter_params) = filter {
+    //     println!("查询参数: {:?}", **filter_params);
+    // }
     // 精确查询字段（exact query）
     let exactquery = vec!["status".to_string()];
     // 模糊查询字段（like query） "role_name".to_string()
@@ -145,8 +145,7 @@ fn escape_csv(s: &str) -> String {
 // 流式导出 CSV
 pub async fn post_export(pool: web::Data<MySqlPool>) -> HttpResponse {
     use actix_web::web::Bytes;
-    use futures_util::stream::{self, StreamExt};
-
+    use futures::stream::{self, StreamExt};
     // BOM + 表头
     let head = {
         let mut v = vec![0xEF, 0xBB, 0xBF];

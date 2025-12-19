@@ -184,11 +184,13 @@ pub struct AddRoleRequest {
 
     #[serde(rename = "deptIds")] 
     pub dept_ids: Vec<i32>,          // 部门ID数组
-    
 
-    pub menu_check_strictly: bool,    // 菜单树选择项是否关联显示
-    pub dept_check_strictly: bool,    // 部门树选择项是否关联显示
-    pub remark: String,             // 备注
+    #[serde(rename = "menuCheckStrictly")]
+    pub menu_check_strictly: bool, //Option<bool>,    // 菜单树选择项是否关联显示
+
+    #[serde(rename = "deptCheckStrictly")]
+    pub dept_check_strictly: bool, //<bool>,    // 部门树选择项是否关联显示
+    pub remark: Option<String>,// 备注
 }
 
 

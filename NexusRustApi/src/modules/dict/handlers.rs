@@ -219,7 +219,7 @@ pub async fn post_add_data(
 //     data.insert("dict_label".to_string(), form.dict_label.clone().unwrap_or_default());
 //     data.insert("dict_value".to_string(), form.dict_value.clone().unwrap_or_default());
 //     data.insert("dict_sort".to_string(), form.dict_sort.map(|v| v.to_string()).unwrap_or_default());
-//     data.insert("remark".to_string(), form.remark.clone().unwrap_or_default());
+       data.insert("remark".to_string(), form.remark.clone());
 //     data.insert("status".to_string(), form.status.clone().unwrap_or_default());
 
     // 调用API创建方法
