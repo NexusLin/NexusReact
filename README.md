@@ -24,7 +24,7 @@ title: 天工
 
 有些版本怕菜了被骂暂时没有放出来，需要的可以联系我star换取
 
-下面是我的小助理wx，正经人千万别加
+下面是我的小助理支付宝wx，快加她吧
 
 ![img](https://diag.wuzhengai.com/nexusimgs/about/alipay-share-meizi.png?width=100&height=100)
 
@@ -163,9 +163,6 @@ cargo run
 cargo run watch -x
 ```
 
-
-
-
 ## 5、关于我（作者林太白）
 
 👉个人博客主页
@@ -179,7 +176,9 @@ https://nexuslin.github.io/
 
 赞助100以上小伙伴可以留下个人联系方式享受对应的每年VIP课程以及VIP文章和模块代码，具体可以Call Me！
 
-技术交流或者理财闲聊可以加我微信，我会拉你进技术交流群！
+技术交流拉你进TG交流群，一起学习交流
+
+理财闲聊可以加我微信，我会拉你进黄金基金股票技术交流群！
 
 ![img](https://diag.wuzhengai.com/nexusimgs/about/lintaibaiweixin.png?width=200&height=200)
 
