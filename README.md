@@ -7,9 +7,10 @@ title: 天工
 
 ## 1、介绍
 
+### 源码地址
 
 ```JS
-项目仓库
+项目仓库,感兴趣的可以给个star，或者加我微信，拉你进技术群交流！
 
 【GIthub地址】 https://github.com/lintaibai/TG
 
@@ -17,35 +18,54 @@ title: 天工
 
 ```
 
+### 项目介绍
 
->天工项目，旨在为开发者提供一套完整的三端开发框架（Web(Vue、React)、API、App），帮助开发者快速搭建项目，提高开发效率。
+>天工项目，旨在为开发者提供一套完整的多端开发框架（Web(Vue、React)、API、App），本地化构建完整组件库，帮助开发者快速搭建项目，提高开发效率。
 
 >天工开源项目采用MIT开源协议
 
-有些版本怕菜了被骂暂时没有放出来，需要的可以联系我star换取
 
-下面是我的小助理支付宝wx，快加她吧
+有些版本暂时没有放出来，需要的可以联系我star换取
 
-![img](https://diag.wuzhengai.com/nexusimgs/about/alipay-share-meizi.png?width=100&height=100)
+下面是我的支付宝红包，扫码领取红包使用就可以帮助到我！
+
+![img](https://diag.wuzhengai.com/nexusimgs/about/alipay-share-meizi.png?width=50&height=50)
 
 
-### 👉项目更新轻重排名
+### 👉Nexus-Monorepo 项目介绍
+
+| 文件 |  相关技术栈 | 开发状态| 备注|
+|----------------------|----------------------|----------------------|----------------------|
+| NexusVue（Vue侧重） | **Vue3/Vite/Element Plus/TS/tailWindCss**|迭代更新| 端口号66|
+| NexusReactShadcn（React侧重）| **React19/Vite/Antd/Zustand/TS/Shadcn/tailWindCss** | 迭代更新| 端口号88 |
+
+
+
+>其他部分
 
 | 项目文件 |  相关技术栈 | 开发状态| 备注|
 |----------------------|----------------------|----------------------|----------------------|
-| NexusVuePro（前端Vue3-完善中暂未放出） | **Vue3/Vite/Element Plus/TS/tailWindCss**|迭代更新| 端口号66|
-| NexusReactVite（前端React-完善中暂未放出）| **React19/Vite/Antd/Zustand/TS/Ant design/tailWindCss** | 迭代更新| 端口号88 |
+| NexusRustApi（Rust后端-侧重） | **（Rust/Cargo/Mysql）** |更新中| 端口号 8888 |
+| NexusReactAntd（前端React）| **React19/Vite/Antd/Zustand/TS/tailWindCssAnt design/** | 迭代更新| 端口号88 |
 | NexusUapp（移动端） | **（Uniapp/Vue3）** |更新中| - |
-| NexusApi（Node后端） | **（Node/Express/Mysql）** | 迭代更新| 端口号 8888 |
-| NexusRustApi（Rust后端） | **（Rust/Cargo/Mysql）** |暂缓更新| 端口号 8888 |
+| NexusNodeApi（Node后端侧重） | **（Node/Express/Mysql）** | 迭代更新| 端口号 8888 |
+
+### 👉文件介绍
+
+| 文件 | 技术栈| 描述| 备注|
+|----------------------|----------------------|------------|----------------------|
+| NexusMonorepo | Monorepo结构项目|包含Vue和React开源项目以及对应的封装UI组件库 |--| -- |
+| NexusCss |css |css原子化样式 |更新中| 仿Tailwindcss |
 
 
-### 👉组件库文件对应阐述|功能
-| 文件 |技术栈 | 状态| 备注|
-|----------------------|----------------------|----------------------|----------------------|
-| NexusNpm（多个multiple） |Vue3 +ts |npm多组件库源码 |更新中|验证码  |
-| NexusNpmS（单个single） |Vue3 +js|npm单组件库源码 |--| 验证码Code |
-| NexusDemo（Demo案例仓库-供学习） |HTML\css\js|学习案例库 |--| -- |
+
+>其他 
+
+| 文件 | 技术栈| 描述| 备注|
+|----------------------|----------------------|------------|----------------------|
+| NexusNpmM（多个multiple组件库） |Vue3 +ts |npm多组件库源码 |更新中|验证码  |
+| NexusNpmS（单个single组件库-提供给从视频进来学习的伙伴） |Vue3 +js|npm单组件库源码 |--| 验证码Code |
+| NexusDemo（Demo案例仓库-供视频学习） |HTML\css\js|学习案例库 |--| -- |
 
 
 
