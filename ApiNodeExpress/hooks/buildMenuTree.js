@@ -52,12 +52,12 @@ function buildMenuTree(menus) {
             hidden: menu.menu_type !== "M",
             component: menu.component,
             meta: {
+                show: menu.visible === "0", // "0" 显示 "1" 隐藏
                 title: menu.menu_name,
                 icon: menu.icon,
                 no_cache: menu.is_cache === 1,
                 link: menu.query ? (query => query.trim() ? query : null)(menu.query) : null,
-                show: menu.visible === "0", // "0" 显示 "1" 隐藏
-                isLink:menu.is_link == 0,
+                // isLink:menu.is_link == 0,
             },
             children: []
         });

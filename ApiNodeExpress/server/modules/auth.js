@@ -12,8 +12,10 @@ const {buildMenuTree} = require('../../hooks/buildMenuTree');
 // 引入信息提示
 const { message } = require('../../utils/resmsg.js'); 
 
-// 引入密钥
-const { SECRET_KEY} = require("../../config/index");
+// 引入配置
+const config = require("../../config");
+const { security } = config;
+const { secretKey: SECRET_KEY } = security;
 
 const jwt = require("jsonwebtoken"); //导入jsonwebtoken生成 jwt 字符串的包
 
@@ -51,6 +53,7 @@ router.get('/', authenticateToken,(req, res) => {
           WHERE user_id = ?
         `;
         connectionPool.query(roleQuery, [req.user.userId], (err, roleResults) => {
+          console.log(roleResults,'====roleResults===');
           if(roleResults.length>0){
             console.log(roleResults[0].role_id,'roleResults');  
             // 根据角色ID查询菜单ID
@@ -79,7 +82,13 @@ router.get('/', authenticateToken,(req, res) => {
                     });
                 })   
              })
-          }
+          }else{
+            res.send({
+                code: 200,
+                data: [],
+                msg: '查询成功!',
+            });
+          } 
         })
     }
 })

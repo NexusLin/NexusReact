@@ -13,8 +13,9 @@ const connectionPool = require('../../config/db'); // 引入数据库连接池�
 const { convertKeysToSnakeCase,convertToCamelCase} = require('../../hooks/methods.js'); // 引入封装方法
 
 class WebSocketServer {
-  constructor(port) {
-    this.wss = new WebSocket.Server({ port });
+  constructor(server) {
+    this.server = server;
+    this.wss = new WebSocket.Server({ noServer: true });
     this.clients = new Set();  // 用于存储所有连接的客户端
 
     // 当客户端连接时触发
@@ -44,7 +45,13 @@ class WebSocketServer {
       });
     });
 
-    console.log(`ws聊天已启动，监听端口 ${port}`);
+    this.server.on('upgrade', (request, socket, head) => {
+      this.wss.handleUpgrade(request, socket, head, (ws) => {
+        this.wss.emit('connection', ws, request);
+      });
+    });
+
+    console.log(`ws聊天已绑定到 HTTP 端口 ${this.server.address()?.port || 'unknown'}`);
   }
 
   // 发送消息给所有连接的客户端
@@ -67,10 +74,14 @@ class WebSocketServer {
 
 let wsServer=null;
 
-function initWsChat(){
+function initWsChat(server) {
     console.log('初始化ws聊天室');
-    // 创建 WebSocket 服务器实例，监听端口 3001
-    wsServer = new WebSocketServer(3001);
+
+    if (!server) {
+        throw new Error('initWsChat requires an HTTP server instance');
+    }
+
+    wsServer = new WebSocketServer(server);
     // 调用广播功能，发送信息给所有客户端
       setInterval(() => {
         wsServer.broadcast(JSON.stringify({type:'success',data:'服务器发送的聊天消息'}));

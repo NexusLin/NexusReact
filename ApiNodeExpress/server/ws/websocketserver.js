@@ -4,14 +4,12 @@ const WebSocket = require('ws');
 const http = require('http');
 
 class WebSocketServer {
-  constructor(port) {
-    this.wss = new WebSocket.Server({ port });
-
-    // this.wss = new WebSocket.Server({ noServer: true });
+  constructor(server) {
+    this.server = server;
+    this.wss = new WebSocket.Server({ noServer: true });
 
     this.clients = new Set();  // 用于存储所有连接的客户端
 
-    // 当客户端连接时触发
     this.wss.on('connection', (ws) => {
       console.log('客户端已连接！！');
 
@@ -32,18 +30,13 @@ class WebSocketServer {
       });
     });
 
-
-    // 将 WebSocket 服务器与 HTTP 服务关联
-    this.wss.on('upgrade', (request, socket, head) => {
-      // 检查是否是 WebSocket 请求
-      if (request.headers['upgrade'] === 'websocket') {
-        wsServer.handleUpgrade(request, socket, head, (ws) => {
-          wsServer.emit('connection', ws, request);
-        });
-      }
+    this.server.on('upgrade', (request, socket, head) => {
+      this.wss.handleUpgrade(request, socket, head, (ws) => {
+        this.wss.emit('connection', ws, request);
+      });
     });
 
-    console.log(`WebSocket 服务器已启动，监听端口 ${port}`);
+    console.log(`WebSocket 服务器已绑定到 HTTP 端口 ${this.server.address()?.port || 'unknown'}`);
   }
 
   // 发送消息给所有连接的客户端
@@ -75,13 +68,29 @@ class WebSocketServer {
 //   }
 // }, 10000);
 
+
+// 公共配置部分
+const config = require("../../config");
+const { database } = config;
+
+const {
+    host: dbhost,
+    user: dbuser,
+    password: dbpassword,
+    database: dbdatabase
+} = database;
+
+
 let wsServer=null;
 
-function initWs(){
-    console.log('初始化ws');
+function initWs(server) {
+    console.log('===ws初始化==');
 
-    // 创建 WebSocket 服务器实例，监听端口 3000
-    wsServer = new WebSocketServer(3000);
+    if (!server) {
+        throw new Error('initWs requires an HTTP server instance');
+    }
+
+    wsServer = new WebSocketServer(server);
 
     // 调用广播功能，发送信息给所有客户端
       setInterval(() => {

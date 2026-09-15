@@ -86,6 +86,7 @@ router.get('/', (req, res) => {
                   FROM sys_menu
                   WHERE menu_id IN (?)
                 `;
+                console.log(permsQuery, '==permsQuery==');
                 connectionPool.query(permsQuery, [menuIds], (err, permsResults) => {
                   // console.log(permsResults, 'permsResults');
 

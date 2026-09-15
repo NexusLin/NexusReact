@@ -59,33 +59,10 @@ function isValidDateTime(str) {
 }
 
 
-// // 格式化日期为 'YYYY-MM-DD HH:mm:ss' 格式
-// function formatDate(dateStr) {
-//     const date = new Date(dateStr);
-//     return date.toLocaleString('zh-CN', {
-//         hour12: false, // 24小时制
-//         year: 'numeric',
-//         month: '2-digit',
-//         day: '2-digit',
-//         hour: '2-digit',
-//         minute: '2-digit',
-//         second: '2-digit'
-//     }).replace(',', ''); // 移除多余的逗号
-// }
-
 // 格式化日期为 'YYYY-MM-DD HH:mm:ss' 格式
 function formatDate(dateStr) {
     // 创建一个 Date 对象
     const date = new Date(dateStr);
-    // return date.toLocaleString('zh-CN', {
-    //     hour12: false, // 24小时制
-    //     year: 'numeric',
-    //     month: '2-digit',
-    //     day: '2-digit',
-    //     hour: '2-digit',
-    //     minute: '2-digit',
-    //     second: '2-digit'
-    // }).replace(',', ''); // 移除多余的逗号
 
     // 获取日期部分（年-月-日）
     const datePart = date.toISOString().split('T')[0]; // 获取 "2024-12-12"
@@ -102,14 +79,6 @@ function isTimeDate(obj) {
 }
 
 // 驼峰命名法(前端使用)=>蛇形命名法(sql数据库使用)
-
-// 查询参数的时候使用 
-// if (str === 'createTime') {
-    //     return 'create_time'; // 转换为驼峰命名
-    // }
-    // if (str === 'updateTime') {
-    //     return 'update_time'; // 转换为驼峰命名
-    // }
 function camelToSnake(str) {
     if(isTimeDate(str)){
         console.log(str,'str');
@@ -132,7 +101,6 @@ function convertKeysToSnakeCase(obj) {
 }
 
 
-
 // 将蛇形命名法转换为驼峰命名法
 function snakeToCamel(str) {
     return str.replace(/_([a-z])/g, (match, p1) => p1.toUpperCase());
@@ -152,11 +120,6 @@ function convertToCamelCase(obj) {
                 }else{
                   newObj[newKey] = obj[key];  
                 }
-                // console.log(newKey,'newKey');
-                // console.log(obj[key],'obj[key]');
-                // if(obj[key]!=null && typeof obj[key] === 'object'){
-                //     newObj[newKey] = convertToCamelCase(obj[key]); // 对每个键的值进行递归处理
-                // }
             }
         }
        return newObj;

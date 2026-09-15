@@ -1,6 +1,7 @@
 
 
 const express = require("express"); //引入express api模块
+const http = require('http');
 
 const cors = require("cors"); // 导入 cors跨域
 const bodyParser = require("body-parser"); //引入解析POST请求数据模块
@@ -20,17 +21,28 @@ const fs = require("fs"); //文件处理模块
 
 // 公共配置部分
 // 参数： apiprefix接口前缀，apiip接口ip，apiport接口端口，数据库连接欢迎语
-const { apiip,apiport,nexuswelcome,apiprefix,author,version,versionhello,SECRET_KEY} = require("./config/index");
+const config = require("./config");
+const { server: serverConfig, messages, security } = config;
+
+const apiip = serverConfig.ip;
+const apiport = serverConfig.port;
+const apiprefix = serverConfig.prefix;
+const nexuswelcome = messages.nexusWelcome;
+const author = serverConfig.author;
+const version = serverConfig.version;
+const SECRET_KEY = security.secretKey;
+
+const {versionhello,showWelcomeMessage} = require("./utils/methods");
+
+// 输出版本号
+versionhello('版本号nexus',version);
+// 输出欢迎语
+showWelcomeMessage("❤️ 欢迎光临", "#ff6b6b", "24px");
 
 
 // 密码安全长度
 const {PASSWORD_SECURITY_LENGTH} = require("./config/websetting");
 
-
-versionhello('版本号nexus',version);// 输出版本号
-console.log(`%c${nexuswelcome}`, 'color: #9180ff; font-size: 20px;')
-
- 
 // 引入数据库连接池模块
 const connectionPool = require('./config/db');
 
@@ -107,7 +119,8 @@ const chatRoutes = require('./server/api/chatRoutes');
 //引入上传路由
 const uploadRoutes = require('./server/api/uploadRoutes');
 
-
+//引入文件路由
+const fileRoutes = require('./server/api/fileRoutes');
 
 //引入ws部分
 const {initWs} = require('./server/ws/websocketserver');
@@ -118,6 +131,8 @@ const {initWsChat} = require('./server/ws/websocketchat');
 
 
 const app = express();
+const httpServer = http.createServer(app);
+
 
 // app.options('*', cors()); // 这将在所有路由上启用 CORS 的预检请求处理
 
@@ -125,6 +140,9 @@ app.use(cors());
 app.use(bodyParser.json()); //配置解析，用于解析json和urlencoded格式的数据
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json()); // 中间件，用于解析 POST 请求体中的 JSON 数据
+
+
+
 
 //设置跨域访问
 app.all('*', function(req, res, next) {
@@ -136,6 +154,15 @@ app.all('*', function(req, res, next) {
     next();
 });
 
+
+// // 相对路径设置
+// // 设置静态文件路径，用于访问上传的文件
+// app.use('/uploads', express.static('uploads'));
+// // 绝对路径设置
+// // router.use('/uploads', express.static(path.join(__dirname, '../../uploads')));
+
+// ✅ 正确：静态托管路径通常不与 API 路径混用
+// app.use('/static', express.static('uploads'));
 
 // 定义token认证授权中间件
 const authorize = (req, res, next) => {
@@ -209,12 +236,19 @@ app.use(`/${apiprefix}/applications`, applicationsRoutes);
 // 评论模块
 app.use(`/${apiprefix}/system/comments`, commentsRoutes);
 
+//文件路由
+app.use(`/${apiprefix}/files`, fileRoutes);
 
 // 商品模块
 app.use(`/${apiprefix}/products`, productsRoutes);
 
 // 购物车模块
 app.use(`/${apiprefix}/cartitems`, cartitemsRoutes);
+
+
+
+
+
 
 
 // 上传路由
@@ -323,50 +357,122 @@ app.post(`/${apiprefix}/login`, (req, res) => {
 
 
 // 用户注册接口
-app.post(`/${apiprefix}/register`, (req, res) => {
+// app.post(`/${apiprefix}/register`, async (req, res) => {
 
-    console.log(req.body, 'req');
+//     console.log(req.body, 'req===register===');
+//     const { username, password } = req.body;
+//     let sql = 'SELECT * FROM sys_user WHERE username = ?';
+//     // 查询数据库中是否存在匹配的用户名
+//     connectionPool.query(sql, [username], (error, results) => {
+//         console.log(results,'查询结果！');
+
+//         if (error) throw error;
+//         // 检查查询结果是否为空
+//         if (results.length !== 0) {
+//             res.json({
+//                 code: 401,
+//                 data: results,
+//                 message: '用户名已经存在！'
+//             });
+//         } else {
+//             const name = username;
+//             console.log(name, '加密密码===');
+//             // 加密密码
+//             const hashed_pwd = await bcrypt.hash(password, PASSWORD_SECURITY_LENGTH);
+//             console.log(hashed_pwd, '加密密码===');
+
+//             const values = [name, username, hashed_pwd];
+//             console.log(values, '====values===');
+//             // 准备 SQL 插入语句
+//             const insertSql = "INSERT INTO sys_user (name,username, password,state) VALUES (?,?,?,0)";
+//             connectionPool.query(insertSql, values, (err, results) => {
+//                 console.log(results, 'results-插入结果！');
+//                 if (err) {
+//                     console.error('Error querying database:', err);
+//                     res.status(500).json({ error: 'Internal server error' });
+//                     return;
+//                 }
+//                 res.json({
+//                     code: 200,
+//                     data: results,
+//                     message: '用户注册成功，欢迎你去登陆！'
+//                 });
+//             });
+//         }
+//     });
+// });
+
+
+
+
+// 用户注册接口
+app.post(`/${apiprefix}/register`, async (req, res) => {
+    // 1. 获取参数
     const { username, password } = req.body;
 
-    let sql = 'SELECT * FROM sys_user WHERE username = ?';
-    // 查询数据库中是否存在匹配的用户名
-    connectionPool.query(sql, [username], (error, results) => {
-        console.log(results,'查询结果！');
+    // 2. 基础校验
+    if (!username || !password) {
+        return res.status(400).json({
+            code: 400,
+            message: '用户名或密码不能为空'
+        });
+    }
 
-        if (error) throw error;
-        // 检查查询结果是否为空
-        if (results.length !== 0) {
-            res.json({
+    try {
+        // 3. 查询用户名是否存在
+        // 将 connectionPool.query 封装在 Promise 中以便使用 await
+        const checkUserSql = 'SELECT * FROM sys_user WHERE username = ?';
+        const existingUsers = await new Promise((resolve, reject) => {
+            connectionPool.query(checkUserSql, [username], (error, results) => {
+                if (error) return reject(error);
+                resolve(results);
+            });
+        });
+
+        console.log(existingUsers,'existingUsers');
+        if (existingUsers.length > 0) {
+            return res.json({
                 code: 401,
-                data: results,
                 message: '用户名已经存在！'
             });
-        } else {
-            const name = username;
+        }
 
-            // 加密密码
-            const hashed_pwd = bcrypt.hash(password, PASSWORD_SECURITY_LENGTH);
+        // 4. 加密密码
+        // 这里使用 await 确保密码加密完成后再往下执行
+        const hashed_pwd = await bcrypt.hash(password, PASSWORD_SECURITY_LENGTH);
+        
+        // 5. 插入新用户
+        const name = username; // 根据你的逻辑，name 默认等于 username
+        const insertSql = "INSERT INTO sys_user (name, username, password, state) VALUES (?, ?, ?, 0)";
+        const values = [name, username, hashed_pwd];
 
-            const values = [name, username, hashed_pwd];
-
-            // 准备 SQL 插入语句
-            const insertSql = `INSERT INTO sys_user (name,username, password,state) VALUES (?,?,?,0)`;
+        await new Promise((resolve, reject) => {
             connectionPool.query(insertSql, values, (err, results) => {
-                console.log(results, 'results-插入结果！');
-                if (err) {
-                    console.error('Error querying database:', err);
-                    res.status(500).json({ error: 'Internal server error' });
-                    return;
-                }
-                res.json({
-                    code: 200,
-                    data: results,
-                    message: '用户注册成功，欢迎你去登陆！'
-                });
+                if (err) return reject(err);
+                resolve(results);
+            });
+        });
+
+        // 6. 返回成功响应
+        res.json({
+            code: 200,
+            message: '用户注册成功，欢迎去登陆！'
+        });
+
+    } catch (error) {
+        // 7. 统一错误处理
+        console.error('注册接口错误:', error);
+        // 防止多次响应
+        if (!res.headersSent) {
+            res.status(500).json({
+                code: 500,
+                message: '服务器内部错误',
+                error: config.IS_PRODUCTION ? undefined : error.message
             });
         }
-    });
+    }
 });
+
 
 
 app.use(`/${apiprefix}/getInfo`, userinfoRoutes); // 获取用户信息
@@ -393,7 +499,7 @@ app.use((err, req, res, next) => {
 })
 
 
-app.listen(apiport,apiip,() => {
+httpServer.listen(apiport, apiip, () => {
     console.log(`Server is running on http://${apiip}:${apiport}`);
 });
 
@@ -418,13 +524,10 @@ app.delete('/', function(req, res) {
 
 
 //ws部分  初始化ws日志
-initWs();
-
-
+// initWs(httpServer);
 
 //ws部分 初始化ws聊天信息
-initWsChat();
-
+// initWsChat(httpServer);
 
 
 
