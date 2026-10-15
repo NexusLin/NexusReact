@@ -1,0 +1,378 @@
+/* ==============
+   nexus rpx double 原子化样式(uniapp 部分)
+   ==============
+   基准:2rpx = 1px (double 版,与 nexusrpx.css 内容一致)
+   说明:以这个为最新样式库 /nexus-monorepo/packages/shared
+   ==============
+   目录:
+   1. 字体大小(font08 ~ font44)
+   2. 行高(lineht20 ~ lineht30)
+   3. 内边距(pad / padx / pady / padtp / padbt / padlf / padrt)
+   4. 外边距(mgtp / mgbt)
+   5. 间距(gap)
+   6. 圆角(radius04 ~ radius30)
+   ============== */
+
+
+/* --------
+   1. 字体大小
+   -------- */
+.font08 {
+  font-size: 16rpx;
+}
+
+.font10 {
+  font-size: 20rpx;
+}
+
+.font13 {
+  font-size: 26rpx;
+}
+
+.font14 {
+  font-size: 28rpx;
+}
+
+.font16 {
+  font-size: 32rpx;
+}
+
+.font18 {
+  font-size: 36rpx;
+}
+
+.font20 {
+  font-size: 40rpx;
+}
+
+.font24 {
+  font-size: 48rpx;
+}
+
+.font26 {
+  font-size: 52rpx;
+}
+
+.font30 {
+  font-size: 60rpx;
+}
+
+.font44 {
+  font-size: 88rpx;
+}
+
+/* --------
+   2. 行高
+   -------- */
+.lineht20 {
+  line-height: 40rpx;
+}
+
+.lineht24 {
+  line-height: 48rpx;
+}
+
+.lineht28 {
+  line-height: 56rpx;
+}
+
+.lineht30 {
+  line-height: 60rpx;
+}
+
+/* --------
+   3. 内边距
+   -------- */
+/* 通用内边距 */
+.pad08 {
+  padding: 16rpx;
+  box-sizing: border-box;
+}
+
+.pad10 {
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.pad20 {
+  padding: 40rpx;
+  box-sizing: border-box;
+}
+
+.pad28 {
+  padding: 56rpx;
+  box-sizing: border-box;
+}
+
+.pad30 {
+  padding: 60rpx;
+  box-sizing: border-box;
+}
+
+/* 水平内边距 */
+.padx08 {
+  padding-left: 16rpx;
+  padding-right: 16rpx;
+}
+
+.padx10 {
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+
+.padx20 {
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+}
+
+.padx28 {
+  padding-left: 56rpx;
+  padding-right: 56rpx;
+}
+
+.padx30 {
+  padding-left: 60rpx;
+  padding-right: 60rpx;
+}
+
+/* 垂直内边距 */
+.pady10 {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.pady20 {
+  padding-top: 40rpx;
+  padding-bottom: 40rpx;
+}
+
+.pady28 {
+  padding-top: 56rpx;
+  padding-bottom: 56rpx;
+}
+
+.pady30 {
+  padding-top: 60rpx;
+  padding-bottom: 60rpx;
+}
+
+/* 上内边距 */
+.padtp08 {
+  padding-top: 16rpx;
+}
+
+.padtp10 {
+  padding-top: 20rpx;
+}
+
+.padtp20 {
+  padding-top: 40rpx;
+}
+
+.padtp28 {
+  padding-top: 56rpx;
+}
+
+.padtp30 {
+  padding-top: 60rpx;
+}
+
+/* 下内边距 */
+.padbt08 {
+  padding-bottom: 16rpx;
+}
+
+.padbt10 {
+  padding-bottom: 20rpx;
+}
+
+.padbt20 {
+  padding-bottom: 40rpx;
+}
+
+.padbt28 {
+  padding-bottom: 56rpx;
+}
+
+.padbt30 {
+  padding-bottom: 60rpx;
+}
+
+/* 左内边距 */
+.padlf08 {
+  padding-left: 16rpx;
+}
+
+.padlf10 {
+  padding-left: 20rpx;
+}
+
+.padlf20 {
+  padding-left: 40rpx;
+}
+
+.padlf28 {
+  padding-left: 56rpx;
+}
+
+.padlf30 {
+  padding-left: 60rpx;
+}
+
+/* 右内边距 */
+.padrt08 {
+  padding-right: 16rpx;
+}
+
+.padrt10 {
+  padding-right: 20rpx;
+}
+
+.padrt20 {
+  padding-right: 40rpx;
+}
+
+.padrt28 {
+  padding-right: 56rpx;
+}
+
+.padrt30 {
+  padding-right: 60rpx;
+}
+
+/* --------
+   4. 外边距
+   -------- */
+/* 上外边距 */
+.mgtp08 {
+  margin-top: 16rpx;
+}
+
+.mgtp10 {
+  margin-top: 20rpx;
+}
+
+.mgtp16 {
+  margin-top: 32rpx;
+}
+
+.mgtp20 {
+  margin-top: 40rpx;
+}
+
+.mgtp40 {
+  margin-top: 80rpx;
+}
+
+/* 下外边距 */
+.mgbt08 {
+  margin-bottom: 16rpx;
+}
+
+.mgbt10 {
+  margin-bottom: 20rpx;
+}
+
+.mgbt16 {
+  margin-bottom: 32rpx;
+}
+
+.mgbt20 {
+  margin-bottom: 40rpx;
+}
+
+.mgbt40 {
+  margin-bottom: 80rpx;
+}
+
+/* --------
+   5. 间距
+   -------- */
+/* 极小间距 */
+.gap4 {
+  gap: 8rpx;
+}
+
+.gap8 {
+  gap: 16rpx;
+}
+
+/* 常规小间距 */
+.gap12 {
+  gap: 24rpx;
+}
+
+.gap16 {
+  gap: 32rpx;
+}
+
+.gap20 {
+  gap: 40rpx;
+}
+
+.gap24 {
+  gap: 48rpx;
+}
+
+/* 常规中间距 */
+.gap28 {
+  gap: 56rpx;
+}
+
+.gap30 {
+  gap: 60rpx;
+}
+
+.gap32 {
+  gap: 64rpx;
+}
+
+/* 常规大间距 */
+.gap36 {
+  gap: 72rpx;
+}
+
+.gap40 {
+  gap: 80rpx;
+}
+
+.gap48 {
+  gap: 96rpx;
+}
+
+/* 较大间距 */
+.gap56 {
+  gap: 112rpx;
+}
+
+.gap64 {
+  gap: 128rpx;
+}
+
+/* --------
+   6. 圆角
+   -------- */
+.radius04 {
+  border-radius: 8rpx;
+  box-sizing: border-box;
+}
+
+.radius10 {
+  border-radius: 20rpx;
+  box-sizing: border-box;
+}
+
+.radius20 {
+  border-radius: 40rpx;
+  box-sizing: border-box;
+}
+
+.radius24 {
+  border-radius: 48rpx;
+  box-sizing: border-box;
+}
+
+.radius30 {
+  border-radius: 60rpx;
+  box-sizing: border-box;
+}

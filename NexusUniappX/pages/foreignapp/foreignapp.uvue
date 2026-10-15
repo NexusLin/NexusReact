@@ -1,0 +1,873 @@
+<template>
+	<view class="page">
+		<!-- 顶部头部 -->
+		<view class="header">
+			<!-- <text class="header-page-title text-center fontw500">外来人员访问</text> -->
+			<view class="header-body">
+				<view class="header-text">
+					<text class="header-main-title">车站外来人员<text class="header-main-title-accent font20 fontw400 fonts-normal">预约登记</text></text>
+					<text class="header-note">提交后由被访人及车站管理人员审批，审批通过后生效。</text>
+				</view>
+				<image class="header-illustration" src="/static/header-illustration.png" mode="aspectFit"></image>
+			</view>
+		</view>
+
+		<!-- 基本信息 -->
+		<view class="padx10">
+			<view class="section bg-white-60">
+			<text class="section-title">基本信息</text>
+			<view class="form-row">
+				<view class="row-left">
+					<text class="row-label">姓名</text>
+					<text class="star">*</text>
+				</view>
+				<input class="row-input" v-model="form.employeeName" placeholder="请输入" placeholder-class="row-placeholder" />
+			</view>
+			<view class="form-row">
+				<view class="row-left">
+					<text class="row-label">联系方式</text>
+					<text class="star">*</text>
+				</view>
+				<input class="row-input" v-model="form.employeeTel" type="number" placeholder="请输入" placeholder-class="row-placeholder" />
+			</view>
+			<view class="form-row">
+				<view class="row-left">
+					<text class="row-label">所属单位/公司</text>
+					<text class="star">*</text>
+				</view>
+				<input class="row-input" v-model="form.employeeCompany" placeholder="请输入" placeholder-class="row-placeholder" />
+			</view>
+		</view>
+		</view>
+
+		<!-- 来访信息 -->
+		<view class="padx10">
+			<view class="section bg-white-60">
+			<text class="section-title">来访信息</text>
+			<view class="form-row">
+				<view class="row-left">
+					<text class="row-label">来访事由</text>
+					<text class="star">*</text>
+				</view>
+				<view class="row-value" @click="openSheet('来访事由', reasonOptions, 'visitReason')">
+					<text :class="form.visitReason ? 'value-text' : 'value-placeholder'">{{form.visitReason ? optionLabel(reasonOptions, form.visitReason) : '请选择'}}</text>
+					<view class="chevron"></view>
+				</view>
+			</view>
+			<view class="form-row">
+				<view class="row-left">
+					<text class="row-label">计划访问开始时间</text>
+					<text class="star">*</text>
+				</view>
+				<view class="row-value">
+					<picker class="picker-wrap" mode="date" :value="beginDate" @change="onBeginDateChange">
+						<view class="picker-trigger">
+							<text :class="beginDate ? 'value-text' : 'value-placeholder'">{{beginDate ? beginDate : '请选日期'}}</text>
+						</view>
+					</picker>
+					<picker class="picker-wrap" mode="time" :value="beginTime" @change="onBeginTimeChange">
+						<view class="picker-trigger">
+							<text :class="beginTime ? 'value-text' : 'value-placeholder'">{{beginTime ? beginTime : '请选时间'}}</text>
+						</view>
+					</picker>
+				</view>
+			</view>
+			<view class="form-row">
+				<view class="row-left">
+					<text class="row-label">计划访问结束时间</text>
+					<text class="star">*</text>
+				</view>
+				<view class="row-value">
+					<picker class="picker-wrap" mode="date" :value="endDate" @change="onEndDateChange">
+						<view class="picker-trigger">
+							<text :class="endDate ? 'value-text' : 'value-placeholder'">{{endDate ? endDate : '请选日期'}}</text>
+						</view>
+					</picker>
+					<picker class="picker-wrap" mode="time" :value="endTime" @change="onEndTimeChange">
+						<view class="picker-trigger">
+							<text :class="endTime ? 'value-text' : 'value-placeholder'">{{endTime ? endTime : '请选时间'}}</text>
+						</view>
+					</picker>
+				</view>
+			</view>
+			<view class="form-row">
+				<view class="row-left">
+					<text class="row-label">访问线路</text>
+					<text class="star">*</text>
+				</view>
+				<view class="row-value" @click="openSheet('访问线路', lineOptions, 'lineId')">
+					<text :class="form.lineId ? 'value-text' : 'value-placeholder'">{{form.lineId ? optionLabel(lineOptions, form.lineId) : '请选择'}}</text>
+					<view class="chevron"></view>
+				</view>
+			</view>
+			<view class="form-row">
+				<view class="row-left">
+					<text class="row-label">访问车站</text>
+					<text class="star">*</text>
+				</view>
+				<view class="row-value" @click="openStationSheet()">
+					<text :class="form.stationId ? 'value-text' : 'value-placeholder'">{{form.stationId ? optionLabel(stationOptions, form.stationId) : '请选择'}}</text>
+					<view class="chevron"></view>
+				</view>
+			</view>
+			<view class="form-row">
+				<view class="row-left">
+					<text class="row-label">访问区域</text>
+					<text class="star">*</text>
+				</view>
+				<view class="row-value" @click="openAreaSheet()">
+					<text :class="form.districtId ? 'value-text' : 'value-placeholder'">{{form.districtId ? optionLabel(areaOptions, form.districtId) : '请选择'}}</text>
+					<view class="chevron"></view>
+				</view>
+			</view>
+			<view class="remark-row">
+				<text class="row-label">备注</text>
+				<textarea class="remark-input" v-model="form.applyRemark" placeholder="请输入" placeholder-class="row-placeholder" auto-height="true"></textarea>
+			</view>
+		</view>
+		</view>
+
+		<!-- 访问照片 -->
+		<view class="padx10">
+			<view class="section bg-white-60">
+			<view class="section-title-row">
+				<text class="section-title">访问照片</text>
+				<text class="star">*</text>
+			</view>
+			<view class="photo-box" @click="choosePhoto">
+				<image v-if="faceImage" class="photo-preview" :src="faceImage" mode="aspectFill"></image>
+				<view v-else class="photo-box-inner">
+					<text class="photo-plus">+</text>
+					<text class="photo-label">个人照片</text>
+					<text class="photo-caption">拍照/相册上传</text>
+				</view>
+			</view>
+			<text class="photo-tip">请上传能看清本人面容的照片，近期一寸免冠证件照或现拍照片</text>
+			</view>
+		</view>
+
+		<!-- 提交 -->
+		<view class="submit-area">
+			<text class="submit-note">本人知晓外来人员出入站的行为，并保证所提供的信息均准确无误！</text>
+			<view class="submit-btn" @click="submit">
+				<text class="submit-btn-text">提交预约</text>
+			</view>
+		</view>
+
+		<!-- 底部选择弹层（通用组件） -->
+		<select-sheet :visible="sheetVisible" :title="sheetTitle" :options="sheetOptions" :selected="selectedValue()" @select="onOptionTap" @close="closeSheet"></select-sheet>
+	</view>
+</template>
+
+<script setup lang="uts">
+	import { httpGet, httpPostRaw } from '../../utils/request'
+	import { API_BASE_URL } from '../../config/index'
+	import SelectSheet from '../../components/select-sheet/select-sheet.uvue'
+	import { isValidPhone } from '../../utils/modules/identity.uts'
+
+	interface DictItem {
+		dictLabel: string
+		dictValue: string
+	}
+
+	interface UploadResult {
+		code: number
+		msg: string
+		message: string
+		data: string
+	}
+
+	interface LineNodeItem {
+		id: number
+		nodeName: string
+		nodeCode: string
+		desc: string
+		lineId: string
+		lineName: string
+		name: string
+		stationId: string
+		stationName: string
+		areaId: string
+		areaName: string
+	}
+
+	type SelectOption = {
+		label: string
+		value: string
+	}
+
+	const form = ref({
+		employeeName: '',
+		employeeTel: '',
+		employeeCompany: '',
+		visitReason: '',
+		validBeginTime: '',
+		validEndTime: '',
+		lineId: '',
+		stationId: '',
+		districtId: '',
+		applyRemark: ''
+	})
+
+	const faceImage = ref('')
+
+	// 来访事由：默认兜底选项，进入页面后从字典接口 system/dict/data/type/visitReason 拉取覆盖
+	const reasonOptions = ref<SelectOption[]>([])
+	// 访问线路：默认兜底选项，进入页面后从接口 basic_data/subwayLineNode/open/v2/list 拉取覆盖（参数 lineNodeType=1）
+	const lineOptions = ref<SelectOption[]>([])
+	// 访问车站：默认兜底选项，选择访问线路后按 parentId 从接口拉取覆盖（lineNodeType=2）
+	const stationOptions = ref<SelectOption[]>([])
+	// 访问区域：默认兜底选项，打开弹层时从接口拉取覆盖（lineNodeType=3）
+	const areaOptions = ref<SelectOption[]>([])
+
+	const sheetVisible = ref(false)
+	const sheetTitle = ref('')
+	const sheetOptions = ref<SelectOption[]>([])
+	const sheetTarget = ref('')
+
+	onLoad(() => {
+		loadVisitReasonDict()
+		loadLineOptions()
+	})
+
+	// 拉取访问线路（basic_data/subwayLineNode/open/v2/list，lineNodeType=1）
+	async function loadLineOptions() {
+		try {
+			const list = await httpGet<LineNodeItem[]>('/basic_data/subwayLineNode/open/v2/list', {
+				lineNodeType: 1
+			})
+			const mapped = mapLineNodeList(list)
+			if (mapped.length > 0) {
+				lineOptions.value = mapped
+			}
+		} catch (e) {
+			// 接口异常时保留默认兜底选项
+		}
+	}
+
+	// 拉取访问车站（basic_data/subwayLineNode/open/v2/list，lineNodeType=2，parentId=选中线路）
+	async function loadStationOptions(parentId: string) {
+		try {
+			const list = await httpGet<LineNodeItem[]>('/basic_data/subwayLineNode/open/v2/list', {
+				lineNodeType: 2,
+				parentId: parentId
+			})
+			const mapped = mapLineNodeList(list)
+			if (mapped.length > 0) {
+				stationOptions.value = mapped
+			}
+		} catch (e) {
+			// 接口异常时保留默认兜底选项
+		}
+	}
+
+	// 打开访问车站弹层：需先选线路，再按线路拉取车站列表
+	async function openStationSheet() {
+		if (form.value.lineId == '') {
+			uni.showToast({ title: '请先选择访问线路', icon: 'none' })
+			return
+		}
+		await loadStationOptions(form.value.lineId)
+		openSheet('访问车站', stationOptions.value, 'stationId')
+	}
+
+	// 拉取访问区域（basic_data/subwayLineNode/open/v2/list，lineNodeType=3，parentId=选中车站）
+	async function loadAreaOptions(parentId: string) {
+		try {
+			const list = await httpGet<LineNodeItem[]>('/basic_data/subwayLineNode/open/v2/list', {
+				lineNodeType: 3,
+				parentId: parentId
+			})
+			const mapped = mapLineNodeList(list)
+			if (mapped.length > 0) {
+				areaOptions.value = mapped
+			}
+		} catch (e) {
+			// 接口异常时保留默认兜底选项
+		}
+	}
+
+	// 打开访问区域弹层：需先选车站，再按车站拉取区域列表
+	async function openAreaSheet() {
+		if (form.value.stationId == '') {
+			uni.showToast({ title: '请先选择访问车站', icon: 'none' })
+			return
+		}
+		await loadAreaOptions(form.value.stationId)
+		openSheet('访问区域', areaOptions.value, 'districtId')
+	}
+
+	// 映射线路/车站/区域节点：label 取 desc（中文回显，兼容其他名称字段），value 取 id（提交值，兼容其他 id 字段）
+	function mapLineNodeList(list: LineNodeItem[]): SelectOption[] {
+		const mapped: SelectOption[] = []
+		for (let i = 0; i < list.length; i++) {
+			const item = list[i]
+			let label = ''
+			if (item.desc != null && item.desc != '') {
+				label = item.desc
+			} else if (item.nodeName != null && item.nodeName != '') {
+				label = item.nodeName
+			} else if (item.lineName != null && item.lineName != '') {
+				label = item.lineName
+			} else if (item.stationName != null && item.stationName != '') {
+				label = item.stationName
+			} else if (item.areaName != null && item.areaName != '') {
+				label = item.areaName
+			} else if (item.name != null && item.name != '') {
+				label = item.name
+			}
+			let value = ''
+			if (item.id != null) {
+				value = item.id.toString()
+			} else if (item.lineId != null && item.lineId != '') {
+				value = item.lineId
+			} else if (item.stationId != null && item.stationId != '') {
+				value = item.stationId
+			} else if (item.areaId != null && item.areaId != '') {
+				value = item.areaId
+			} else if (item.nodeCode != null && item.nodeCode != '') {
+				value = item.nodeCode
+			}
+			if (label != '' && value != '') {
+				mapped.push({ label: label, value: value })
+			}
+		}
+		return mapped
+	}
+
+	// 按提交值从选项列表反查回显文本（选中后行上显示中文名，表单提交仍用 value）
+	function optionLabel(options: SelectOption[], value: string): string {
+		for (let i = 0; i < options.length; i++) {
+			if (options[i].value == value) {
+				return options[i].label
+			}
+		}
+		return ''
+	}
+
+	// 拉取来访事由字典（system/dict/data/type/visitReason）
+	async function loadVisitReasonDict() {
+		try {
+			const list = await httpGet<DictItem[]>('/system/dict/data/open/type/visitReason')
+			const mapped: SelectOption[] = []
+			for (let i = 0; i < list.length; i++) {
+				mapped.push({ label: list[i].dictLabel, value: list[i].dictValue })
+			}
+			if (mapped.length > 0) {
+				reasonOptions.value = mapped
+			}
+		} catch (e) {
+			// 接口异常时保留默认兜底选项
+		}
+	}
+
+	function openSheet(title: string, options: SelectOption[], target: string) {
+		sheetTitle.value = title
+		sheetOptions.value = options
+		sheetTarget.value = target
+		sheetVisible.value = true
+	}
+
+	// 计划访问开始/结束时间：日期 + 时间 拆分维护，组合写入 form
+	const beginDate = ref('')
+	const beginTime = ref('')
+	const endDate = ref('')
+	const endTime = ref('')
+
+	function composeDateTime(date: string, time: string): string {
+		if (date == '' || time == '') {
+			return ''
+		}
+		// 秒固定为 :00（原生 time picker 只到分钟）
+		return date + ' ' + time + ':00'
+	}
+
+	function onBeginDateChange(e: UniPickerChangeEvent) {
+		beginDate.value = e.detail.value as string
+		form.value.validBeginTime = composeDateTime(beginDate.value, beginTime.value)
+	}
+	function onBeginTimeChange(e: UniPickerChangeEvent) {
+		beginTime.value = e.detail.value as string
+		form.value.validBeginTime = composeDateTime(beginDate.value, beginTime.value)
+	}
+	function onEndDateChange(e: UniPickerChangeEvent) {
+		endDate.value = e.detail.value as string
+		form.value.validEndTime = composeDateTime(endDate.value, endTime.value)
+	}
+	function onEndTimeChange(e: UniPickerChangeEvent) {
+		endTime.value = e.detail.value as string
+		form.value.validEndTime = composeDateTime(endDate.value, endTime.value)
+	}
+
+	function onOptionTap(option: SelectOption) {
+		if (sheetTarget.value == 'visitReason') {
+			form.value.visitReason = option.value
+		} else if (sheetTarget.value == 'lineId') {
+			form.value.lineId = option.value
+			// 线路变化后，下级车站/区域失效，重新按线路选择
+			form.value.stationId = ''
+			form.value.districtId = ''
+			stationOptions.value = []
+			areaOptions.value = []
+		} else if (sheetTarget.value == 'stationId') {
+			form.value.stationId = option.value
+			// 车站变化后，已选区域失效，需重新按车站选择；同时清空区域选项，防止残留上一车站数据
+			form.value.districtId = ''
+			areaOptions.value = []
+		} else if (sheetTarget.value == 'districtId') {
+			form.value.districtId = option.value
+		}
+		sheetVisible.value = false
+	}
+
+	// 当前弹层字段的已选值，传给组件做选中高亮
+	function selectedValue(): string {
+		if (sheetTarget.value == 'visitReason') {
+			return form.value.visitReason
+		} else if (sheetTarget.value == 'lineId') {
+			return form.value.lineId
+		} else if (sheetTarget.value == 'stationId') {
+			return form.value.stationId
+		} else if (sheetTarget.value == 'districtId') {
+			return form.value.districtId
+		}
+		return ''
+	}
+
+	function closeSheet() {
+		sheetVisible.value = false
+	}
+
+	// 取文件扩展名（小写）
+	function getFileExt(path: string): string {
+		const idx = path.lastIndexOf('.')
+		if (idx < 0) {
+			return ''
+		}
+		return path.substring(idx + 1).toLowerCase()
+	}
+
+	function choosePhoto() {
+		uni.chooseImage({
+			count: 1,
+			extension: ['.png', '.jpg'],
+			success: (res) => {
+				const tempPath = res.tempFilePaths[0]
+				// 格式校验：仅允许 png / jpg。
+				// H5 端路径为 blob:（无后缀），按 MIME type 判断；App 端路径带后缀，按扩展名判断。
+				let allowed = false
+				const tempFile = res.tempFiles[0] as AnyObject
+				const fileType = tempFile['type'] as string | null
+				if (fileType != null && fileType != '') {
+					const t = fileType.toLowerCase()
+					allowed = (t == 'image/png' || t == 'image/jpeg' || t == 'image/jpg')
+				} else {
+					const ext = getFileExt(tempPath)
+					allowed = (ext == 'png' || ext == 'jpg' || ext == 'jpeg')
+				}
+				if (!allowed) {
+					uni.showToast({ title: '仅支持 png / jpg 格式图片', icon: 'none' })
+					return
+				}
+				// 大小校验：图片限制 200KB 以内（size 单位为字节）
+				const fileSize = tempFile['size'] as number
+				if (fileSize > 200 * 1024) {
+					uni.showToast({ title: '文件过大，图片限制200k以内', icon: 'none' })
+					return
+				}
+				uni.showLoading({ title: '上传中...' })
+				uni.uploadFile({
+					url: API_BASE_URL + '/common/open/upload',
+					filePath: tempPath,
+					name: 'file',
+					success: (uploadRes) => {
+						uni.hideLoading()
+						try {
+							const result = JSON.parse(uploadRes.data) as UploadResult
+							if (result.code == 0 || result.code == 200) {
+								if (result.data != null && result.data != '') {
+									// 接口返回相对路径（如 /uploads/common/xxx.png），展示时拼接口域名
+									faceImage.value = API_BASE_URL + result.data
+								} else {
+									uni.showToast({ title: '上传失败', icon: 'none' })
+								}
+							} else {
+								uni.showToast({ title: '上传失败', icon: 'none' })
+							}
+						} catch (e) {
+							uni.showToast({ title: '上传失败', icon: 'none' })
+						}
+					},
+					fail: () => {
+						uni.hideLoading()
+						uni.showToast({ title: '上传失败', icon: 'none' })
+					}
+				})
+			}
+		})
+	}
+
+	async function submit() {
+		if (form.value.employeeName == '') {
+			uni.showToast({ title: '请填写姓名', icon: 'none' })
+			return
+		}
+		if (form.value.employeeTel == '') {
+			uni.showToast({ title: '请填写联系方式', icon: 'none' })
+			return
+		}
+		if (!isValidPhone(form.value.employeeTel)) {
+			uni.showToast({ title: '请输入正确的手机号', icon: 'none' })
+			return
+		}
+		if (form.value.employeeCompany == '') {
+			uni.showToast({ title: '请填写所属单位/公司', icon: 'none' })
+			return
+		}
+		// visitReason：暂不拦截，提交时使用假数据（见下方 submitData）
+		if (form.value.validBeginTime == '') {
+			uni.showToast({ title: '请选择计划访问开始时间', icon: 'none' })
+			return
+		}
+		if (form.value.validEndTime == '') {
+			uni.showToast({ title: '请选择计划访问结束时间', icon: 'none' })
+			return
+		}
+		// 计划访问结束时间必须晚于开始时间（日期时间均为 YYYY-MM-DD HH:mm:ss 格式，可直接按字符串比较）
+		if (form.value.validEndTime <= form.value.validBeginTime) {
+			uni.showToast({ title: '计划访问结束时间需晚于开始时间', icon: 'none' })
+			return
+		}
+		if (form.value.lineId == '') {
+			uni.showToast({ title: '请选择访问线路', icon: 'none' })
+			return
+		}
+		if (form.value.stationId == '') {
+			uni.showToast({ title: '请选择访问车站', icon: 'none' })
+			return
+		}
+		if (form.value.districtId == '') {
+			uni.showToast({ title: '请选择访问区域', icon: 'none' })
+			return
+		}
+		if (faceImage.value == '') {
+			uni.showToast({ title: '请上传访问照片', icon: 'none' })
+			return
+		}
+
+		// faceImage：页面展示用完整 URL，提交时还原为相对路径
+		let submitFaceImage = faceImage.value
+		if (submitFaceImage.startsWith(API_BASE_URL)) {
+			submitFaceImage = submitFaceImage.substring(API_BASE_URL.length)
+		}
+		// 组装提交数据：visitReason 提交 dictLabel（字典接口返回的中文显示名），
+		// lineId / stationId / districtId 后端要求整数，从字符串转 int
+		let submitVisitReason = optionLabel(reasonOptions.value, form.value.visitReason)
+		if (submitVisitReason == '') {
+			// 字典选项未加载时兜底提交原值
+			submitVisitReason = form.value.visitReason
+		}
+		const submitData: AnyObject = {
+			employeeName: form.value.employeeName,
+			employeeTel: form.value.employeeTel,
+			employeeCompany: form.value.employeeCompany,
+			visitReason: submitVisitReason,
+			validBeginTime: form.value.validBeginTime,
+			validEndTime: form.value.validEndTime,
+			lineId: Number.parseInt(form.value.lineId),
+			stationId: Number.parseInt(form.value.stationId),
+			districtId: Number.parseInt(form.value.districtId),
+			applyRemark: form.value.applyRemark,
+			faceImage: submitFaceImage
+		}
+		console.log('【提交预约】提交数据：' + JSON.stringify(submitData))
+		try {
+			const result = await httpPostRaw<AnyObject>('/h5/attendance/visitor/register', submitData)
+			console.log('【提交预约】提交成功：' + JSON.stringify(result))
+			// code 为 0 或 200 时（httpPostRaw 已按此判定 resolve），提交成功提示固定为“预约提交成功”
+			uni.redirectTo({
+				url: '/pages/success/success'
+			})
+		} catch (e) {
+			console.log('【提交预约】提交失败：' + JSON.stringify(e))
+			// 失败提示优先取后端返回的信息（httpPostRaw 失败时 reject 的 Error.message，其内容取自 res.message / res.msg）
+			let failMsg = (e as Error).message
+			if (failMsg == '') {
+				failMsg = '提交失败，请稍后重试'
+			}
+			uni.showToast({ title: failMsg, icon: 'none' })
+		}
+	}
+
+	function goBack() {
+		uni.navigateBack({
+			fail: () => {
+				uni.showToast({ title: '当前已是首页', icon: 'none' })
+			}
+		})
+	}
+</script>
+
+<style>
+	.page {
+		background-color: #FBFDFF;
+		background: #F5F9FF;
+		min-height: 100vh;
+		padding-bottom: 80rpx;
+	}
+
+	/* 头部 */
+	.header {
+		position: relative;
+		flex-direction: column;
+		background-image: linear-gradient(180deg, #CDE3FF 0%, #E3F0FF 55%, #F1F7FF 100%);
+		padding: 40rpx 56rpx 56rpx 40rpx;
+	}
+	.back-btn {
+		position: absolute;
+		left: 16rpx;
+		top: 36rpx;
+		width: 64rpx;
+		height: 64rpx;
+		justify-content: center;
+		align-items: center;
+		z-index: 2;
+	}
+	.back-arrow {
+		font-size: 60rpx;
+		line-height: 64rpx;
+		color: #152F5B;
+	}
+	.header-page-title {
+		/* 居中(原子类 text-center)、字重 500(原子类 fontw500) 已在 class 上，此处仅保留无原子类对应的样式 */
+		font-size: 34rpx;
+		color: #102A56;
+		font-family: "Alibaba PuHuiTi 2.0";
+		letter-spacing: -0.165rpx;
+	}
+	.header-body {
+		margin-top: 28rpx;
+		flex-direction: row;
+		align-items: center;
+	}
+	.header-text {
+		flex: 1;
+		flex-direction: column;
+	}
+	.header-main-title {
+		font-size: 38rpx;
+		font-weight: 600;
+		color: #303030;
+	}
+
+	.header-main-title-accent {
+		/* 字号(font20=40rpx)、字重(fontw400)、style(fonts-normal) 已用原子类，仅保留无原子类对应的样式 */
+		color: #256EFF;
+		font-family: FZDaBiaoSong-B06S;
+	}
+	.header-note {
+		margin-top: 14rpx;
+		font-size: 22rpx;
+		line-height: 34rpx;
+		color: #909090;
+	}
+	.header-illustration {
+		width: 230rpx;
+		height: 190rpx;
+		margin-left: 12rpx;
+	}
+
+	/* 区块（小卡片：半透明白底 + 圆角 + 细边框 + 投影；背景色已用原子类 bg-white-60） */
+	.section {
+		padding: 40rpx;
+		box-sizing: border-box;
+		margin-bottom: 24rpx;
+		border-radius: 24rpx;
+		border: 0.833px solid rgba(255, 255, 255, 0.80);
+		box-shadow: 0 12rpx 28rpx 0 rgba(32, 79, 155, 0.13);
+	}
+	.section-title {
+		display: block;
+		margin-bottom: 6rpx;
+		font-size: 28rpx;
+		font-weight: 600;
+		color: #303030;
+	}
+	.section-title-row {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	/* 表单行 */
+	.form-row {
+		height: 100rpx;
+		flex-direction: row;
+		align-items: center;
+		border-bottom-width: 1rpx;
+		border-bottom-style: solid;
+		border-bottom-color: #EEF0F2;
+	}
+	.row-left {
+		flex-direction: row;
+		align-items: center;
+	}
+	.row-label {
+		font-size: 28rpx;
+		color: #303030;
+	}
+	.star {
+		font-size: 28rpx;
+		color: #FF484B;
+		margin-left: 6rpx;
+	}
+	.row-input {
+		flex: 1;
+		margin-left: 20rpx;
+		height: 100%;
+		font-size: 28rpx;
+		color: #303030;
+		text-align: right;
+	}
+	.row-placeholder {
+		color: #A0A0A0;
+		font-size: 28rpx;
+	}
+	.row-value {
+		flex: 1;
+		margin-left: 20rpx;
+		height: 100%;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	.value-text {
+		font-size: 28rpx;
+		color: #303030;
+	}
+	.value-placeholder {
+		font-size: 28rpx;
+		color: #A0A0A0;
+	}
+	.chevron {
+		width: 14rpx;
+		height: 14rpx;
+		border-right-width: 4rpx;
+		border-top-width: 4rpx;
+		border-right-style: solid;
+		border-top-style: solid;
+		border-right-color: #B9C2D0;
+		border-top-color: #B9C2D0;
+		transform: rotate(45deg);
+		margin-left: 14rpx;
+	}
+
+	/* 日期/时间 picker */
+	.picker-wrap {
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-end;
+		margin-left: 20rpx;
+	}
+	.picker-trigger {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	/* 备注（两行输入框，高度自适应） */
+	.remark-row {
+		margin-top: 24rpx;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.remark-input {
+		width: 100%;
+		margin-top: 16rpx;
+		min-height: 121rpx;
+		border-radius: 8rpx;
+		border-width: 1rpx;
+		border-style: solid;
+		border-color: #E2E3E5;
+		background-color: #FFFFFF;
+		padding: 20rpx;
+		box-sizing: border-box;
+		font-size: 28rpx;
+		line-height: 40rpx;
+		color: #303030;
+		text-align: left;
+	}
+
+	/* 访问照片 */
+	.photo-box {
+		margin-top: 28rpx;
+		width: 260rpx;
+		height: 260rpx;
+		border-width: 2rpx;
+		border-style: solid;
+		border-color: #DBE1EB;
+		border-radius: 16rpx;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+	}
+	.photo-box-inner {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.photo-plus {
+		font-size: 60rpx;
+		line-height: 60rpx;
+		color: #6B82B5;
+	}
+	.photo-label {
+		margin-top: 12rpx;
+		font-size: 26rpx;
+		color: #353636;
+	}
+	.photo-caption {
+		margin-top: 8rpx;
+		font-size: 22rpx;
+		color: #9EA0A5;
+	}
+	.photo-preview {
+		width: 100%;
+		height: 100%;
+		border-radius: 16rpx;
+	}
+	.photo-tip {
+		display: block;
+		margin-top: 20rpx;
+		font-size: 22rpx;
+		line-height: 34rpx;
+		color: #E39450;
+	}
+
+	/* 提交 */
+	.submit-area {
+		margin-top: 48rpx;
+		padding: 0 40rpx;
+	}
+	.submit-note {
+		display: block;
+		text-align: center;
+		font-size: 20rpx;
+		line-height: 32rpx;
+		color: #9A9A9A;
+		margin-bottom: 28rpx;
+	}
+	.submit-btn {
+		height: 110rpx;
+		width: 100%;
+		border-radius: 16rpx;
+		border: 0.833rpx solid rgba(255, 255, 255, 0.90);
+		background: linear-gradient(180deg, #3984F5 0%, #2B46F2 100%);
+		box-shadow: 0 7rpx 16rpx 0 rgba(45, 100, 188, 0.16);
+		justify-content: center;
+		align-items: center;
+	}
+	.submit-btn-text {
+		font-size: 32rpx;
+		color: #FFFFFF;
+		font-weight: 500;
+	}
+</style>

@@ -1,0 +1,10 @@
+// nexus 原子化样式聚合入口
+// 说明：以 .scss 副本引入（nexus.scss / nexusrpxdouble.scss），
+// 原因：uni-app x 的 css 编译器无法按相对路径解析 .css 文件的 @import（会报 ENOENT），
+// 故将 nexus.css / nexusrpxdouble.css 复制为同名 .scss 由 sass 内联编译，内容完全一致。
+
+// nexus 原子化样式（web 通用原子类，与 tailwindcss 风格一致）
+@import './nexus';
+
+// nexus rpx 原子化样式（rpx 尺寸原子类，基准 2rpx = 1px）
+@import './nexusrpxdouble';

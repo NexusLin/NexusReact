@@ -1,0 +1,25 @@
+{
+	"pages": [
+		{
+			"path": "pages/foreignapp/foreignapp",
+			"style": {
+				"navigationBarTitleText": "外来人员访问",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/success/success",
+			"style": {
+				"navigationBarTitleText": "预约提交成功",
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "外来人员访问",
+		"navigationBarBackgroundColor": "#FBFDFF",
+		"backgroundColor": "#FBFDFF"
+	},
+	"uniIdRouter": {}
+}

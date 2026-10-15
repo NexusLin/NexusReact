@@ -1,0 +1,11 @@
+import App from './App.uvue'
+// 引入全局公共样式（nexus 原子化样式库聚合：nexus.css + nexusrpxdouble.css）
+import './styles/common.scss'
+
+import { createSSRApp } from 'vue'
+export function createApp() {
+	const app = createSSRApp(App)
+	return {
+		app
+	}
+}

@@ -1,0 +1,207 @@
+<template>
+	<view class="mask" v-if="props.visible" @click="emit('close')">
+		<view class="sheet" @click.stop>
+			<view class="sheet-head">
+				<text class="sheet-title">{{props.title}}</text>
+				<view class="sheet-cancel" @click="emit('close')">
+					<text class="sheet-cancel-text">取消</text>
+				</view>
+			</view>
+			<view class="dt-body">
+				<picker-view class="dt-pv" :value="[dateIndex]" @change="onDateChange">
+					<picker-view-column>
+						<view class="dt-col-item" v-for="(d, i) in dateLabels" :key="i">{{d}}</view>
+					</picker-view-column>
+				</picker-view>
+				<picker-view class="dt-pv" :value="[timeIndex]" @change="onTimeChange">
+					<picker-view-column>
+						<view class="dt-col-item" v-for="(t, i) in timeList" :key="i">{{t}}</view>
+					</picker-view-column>
+				</picker-view>
+			</view>
+			<view class="dt-confirm" @click="confirmPick">
+				<text class="dt-confirm-text">确定</text>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script setup lang="uts">
+	import { watch } from 'vue'
+
+	const props = withDefaults(defineProps<{
+		visible: boolean
+		title: string
+		initValue: string
+	}>(), {
+		visible: false,
+		title: '',
+		initValue: ''
+	})
+
+	const emit = defineEmits<{
+		(e: 'confirm', value: string): void
+		(e: 'close'): void
+	}>()
+
+	const dateLabels = ref<string[]>([])
+	const dateValues = ref<string[]>([])
+	const timeList = ref<string[]>(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'])
+	const dateIndex = ref(0)
+	const timeIndex = ref(0)
+
+	function pad(n: number): string {
+		return (n < 10 ? '0' : '') + n.toString()
+	}
+
+	function buildDateList() {
+		const labels: string[] = []
+		const values: string[] = []
+		const now = new Date()
+		const weekNames: string[] = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+		for (let i = 0; i < 30; i++) {
+			const d = new Date(now.getTime() + i * 24 * 60 * 60 * 1000)
+			const y = d.getFullYear().toString()
+			const m = pad(d.getMonth() + 1)
+			const day = pad(d.getDate())
+			let suffix = ''
+			if (i == 0) {
+				suffix = ' 今天'
+			} else if (i == 1) {
+				suffix = ' 明天'
+			} else {
+				suffix = ' ' + weekNames[d.getDay()]
+			}
+			labels.push(m + '-' + day + suffix)
+			values.push(y + '-' + m + '-' + day)
+		}
+		dateLabels.value = labels
+		dateValues.value = values
+	}
+
+	// 根据 initValue 定位默认索引（未选中时默认今天 + 09:00）
+	function locateDefault() {
+		const v = props.initValue
+		let defDate = ''
+		let defTime = '09:00'
+		if (v != '' && v.indexOf(' ') >= 0) {
+			const parts = v.split(' ')
+			defDate = parts[0]
+			defTime = parts[1]
+		}
+		let di = 0
+		for (let i = 0; i < dateValues.value.length; i++) {
+			if (dateValues.value[i] == defDate) {
+				di = i
+				break
+			}
+		}
+		let ti = 0
+		for (let i = 0; i < timeList.value.length; i++) {
+			if (timeList.value[i] == defTime) {
+				ti = i
+				break
+			}
+		}
+		dateIndex.value = di
+		timeIndex.value = ti
+	}
+
+	watch(() => props.visible, (val: boolean) => {
+		if (val) {
+			if (dateValues.value.length == 0) {
+				buildDateList()
+			}
+			locateDefault()
+		}
+	})
+
+	function onDateChange(e: UniPickerViewChangeEvent) {
+		dateIndex.value = e.detail.value[0]
+	}
+
+	function onTimeChange(e: UniPickerViewChangeEvent) {
+		timeIndex.value = e.detail.value[0]
+	}
+
+	function confirmPick() {
+		const dateVal = dateValues.value[dateIndex.value]
+		const timeVal = timeList.value[timeIndex.value]
+		emit('confirm', dateVal + ' ' + timeVal)
+	}
+</script>
+
+<style>
+	.mask {
+		position: fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.45);
+		z-index: 100;
+		justify-content: flex-end;
+	}
+	.sheet {
+		flex-direction: column;
+		background-color: #FFFFFF;
+		border-top-left-radius: 24rpx;
+		border-top-right-radius: 24rpx;
+		padding-bottom: 40rpx;
+	}
+	.sheet-head {
+		position: relative;
+		height: 96rpx;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		border-bottom-width: 1rpx;
+		border-bottom-style: solid;
+		border-bottom-color: #F0F2F6;
+	}
+	.sheet-title {
+		font-size: 30rpx;
+		font-weight: 600;
+		color: #303030;
+	}
+	.sheet-cancel {
+		position: absolute;
+		right: 32rpx;
+		top: 0;
+		height: 96rpx;
+		justify-content: center;
+	}
+	.sheet-cancel-text {
+		font-size: 26rpx;
+		color: #6B82B5;
+	}
+	.dt-body {
+		flex-direction: row;
+		align-items: center;
+		padding: 24rpx 0;
+	}
+	.dt-pv {
+		flex: 1;
+		height: 440rpx;
+	}
+	.dt-col-item {
+		height: 88rpx;
+		font-size: 30rpx;
+		color: #303030;
+		justify-content: center;
+		align-items: center;
+	}
+	.dt-confirm {
+		margin: 0 40rpx;
+		height: 88rpx;
+		border-radius: 44rpx;
+		background-image: linear-gradient(180deg, #3D82F5 0%, #2E53F2 100%);
+		justify-content: center;
+		align-items: center;
+	}
+	.dt-confirm-text {
+		font-size: 30rpx;
+		color: #FFFFFF;
+		font-weight: 500;
+	}
+</style>

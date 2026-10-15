@@ -1,0 +1,105 @@
+<template>
+	<view class="page">
+		<!-- 顶部头部（与预约登记页一致，无返回按钮） -->
+		<view class="header">
+			<text class="header-page-title text-center fontw500">外来人员访问</text>
+			<view class="header-body">
+				<view class="header-text">
+					<text class="header-main-title">车站外来人员<text class="header-main-title-accent font20 fontw400 fonts-normal">预约登记</text></text>
+					<text class="header-note">提交后由被访人及车站管理人员审批，审批通过后生效。</text>
+				</view>
+				<image class="header-illustration" src="/static/header-illustration.png" mode="aspectFit"></image>
+			</view>
+		</view>
+
+		<!-- 成功内容 -->
+		<view class="success-body">
+			<view class="success-card">
+				<image class="success-image" src="/static/images/appointmentok.png" mode="aspectFit"></image>
+				<text class="success-text fontw500">预约提交成功</text>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script setup lang="uts">
+</script>
+
+<style>
+	.page {
+		background-color: #FBFDFF;
+		background: #F5F9FF;
+		min-height: 100vh;
+	}
+
+	/* 头部（与预约登记页完全一致，无返回按钮） */
+	.header {
+		position: relative;
+		flex-direction: column;
+		background-image: linear-gradient(180deg, #CDE3FF 0%, #E3F0FF 55%, #F1F7FF 100%);
+		padding: 40rpx;
+	}
+	.header-page-title {
+		/* 居中(原子类 text-center)、字重 500(原子类 fontw500) 已在 class 上 */
+		font-size: 34rpx;
+		color: #102A56;
+		font-family: "Alibaba PuHuiTi 2.0";
+		letter-spacing: -0.165rpx;
+	}
+	.header-body {
+		margin-top: 28rpx;
+		flex-direction: row;
+		align-items: center;
+	}
+	.header-text {
+		flex: 1;
+		flex-direction: column;
+	}
+	.header-main-title {
+		font-size: 38rpx;
+		font-weight: 600;
+		color: #303030;
+	}
+	.header-main-title-accent {
+		/* 字号(font20=40rpx)、字重(fontw400)、style(fonts-normal) 已用原子类，仅保留无原子类对应的样式 */
+		color: #256EFF;
+		font-family: FZDaBiaoSong-B06S;
+	}
+	.header-note {
+		margin-top: 14rpx;
+		font-size: 22rpx;
+		line-height: 34rpx;
+		color: #909090;
+	}
+	.header-illustration {
+		width: 230rpx;
+		height: 190rpx;
+		margin-left: 24rpx;
+	}
+
+	/* 成功内容 */
+	.success-body {
+		flex-direction: column;
+		align-items: center;
+		padding: 40rpx 5%;
+	}
+	.success-card {
+		width: 100%;
+		height: 625rpx;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-color: #DFECFF;
+		border-radius: 51rpx;
+		box-shadow: 0 6rpx 15.7rpx 0 rgba(0, 115, 255, 0.25);
+	}
+	.success-image {
+		width: 220rpx;
+		height: 220rpx;
+	}
+	.success-text {
+		margin-top: 40rpx;
+		font-size: 40rpx;
+		color: #102A56;
+	}
+</style>

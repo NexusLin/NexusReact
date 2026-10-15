@@ -1,0 +1,14 @@
+/**
+ * 全局接口配置
+ * 说明：所有接口请求的基础地址，统一在此维护；
+ * 页面 / api 模块通过 `import { API_BASE_URL } from '@/config/index'` 引用。
+ */
+
+// 接口基础地址（统一前缀）
+export const API_BASE_URL: string = 'xxx/prod-api'
+
+// 请求超时时间（毫秒）
+export const REQUEST_TIMEOUT: number = 15000
+
+// 是否开启请求日志（开发调试用，上线前改为 false）
+export const DEBUG_REQUEST: boolean = true

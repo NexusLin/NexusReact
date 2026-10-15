@@ -1,0 +1,47 @@
+{
+  // ── 语言服务：由 DCloud 官方「uni-app x语言服务」插件接管 ──
+  // 不要在这里把 *.uvue 关联为 vue、*.uts 关联为 typescript：
+  // 那会让 Volar 接管文件、与官方插件冲突，导致 uni API 全部报红。
+  // 官方插件会自动关联 uvue/uts 语言（安装后重启编辑器生效）。
+
+  // ── 编辑器基础：与项目 .editorconfig（tab 缩进、LF、UTF-8）保持一致 ──
+  "editor.tabSize": 2,
+  "editor.insertSpaces": false, // 使用 Tab 缩进
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "editor.formatOnSave": true, // 保存时自动格式化（如不习惯可改为 false）
+
+  // ── 格式化：uvue/uts/vue/ts/json 统一交给已安装的 Prettier ──
+  // prettier 默认 2 空格，这里对齐 .editorconfig 的 Tab + 4
+  "prettier.useTabs": true,
+  "prettier.tabWidth": 2,
+  "prettier.documentSelectors": ["**/*.uvue", "**/*.uts"],
+  "[uvue]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[uts]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+
+  // ── Emmet：在 .uvue 模板里支持 HTML 缩写（如输入 div 回车生成标签） ──
+  "emmet.includeLanguages": {
+    "vue": "html"
+  },
+
+  // ── 排除编译产物，减少文件树/全局搜索噪音（.gitignore 已忽略，这里是 VSCode 视角） ──
+  "files.exclude": {
+    "unpackage": true
+  }
+}

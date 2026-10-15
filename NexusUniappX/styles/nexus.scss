@@ -1,0 +1,1428 @@
+/* /nexus-monorepo/packages/shared */
+/* 以这个为最新样式库 */
+
+/*nexus自研原子化部分样式--不涉及具体尺寸*/
+
+/* ==============
+   nexus 自研原子化样式
+   ==============
+   目录:
+   1. 字体
+   2. 文字省略
+   3. 滚动条隐藏
+   4. 交互控制(禁用/不可复制)
+   5. 百分比宽高(w-bai / h-bai)
+   6. 绝对定位居中
+   7. 其他自定义(z-fu1 / text-indent / w-onehalf)
+   8. 自定义背景透明度系列(white/black/purple/pink/red/blue)
+   ------------
+   以下为与 tailwindcss 一致的样式
+   9.  文本控制(whitespace / break / text-align)
+   10. 宽高(w-auto / w-full / h-full / h-screen)
+   11. 背景(bg-white / bg-cover)
+   12. 边框样式(border-*)
+   13. Flex 布局(display / direction / wrap / 属性 / grow / shrink)
+   14. Flex 对齐(justify / items / self / content / place / order)
+   15. 溢出(overflow-*)
+   16. 定位(static / fixed / absolute / relative / sticky)
+   17. 层级(z-index)
+   18. 鼠标(cursor)
+   19. 透明度(opacity)
+   ============== */
+
+
+/* ========1. 字体============ */
+.font-family-pingfang {
+  font-family: PingFangSC, "PingFang SC";
+}
+
+.font-weiruanyahei {
+  font-family: Microsoft YaHei;
+}
+
+/* 字体样式 */
+.fonts-normal {
+  font-style: normal;
+}
+
+.fonts-italic {
+  font-style: italic;
+}
+
+.fonts-oblique {
+  font-style: oblique;
+}
+
+/* 字体粗细 */
+.fontw-normal {
+  font-weight: normal;
+}
+
+.fontw-lighter {
+  font-weight: lighter;
+}
+
+.fontw-bolder {
+  font-weight: bolder;
+}
+
+
+.fontw100 {
+  font-weight: 100;
+}
+
+.fontw200 {
+  font-weight: 200;
+}
+
+.fontw300 {
+  font-weight: 300;
+}
+
+.fontw400 {
+  font-weight: 400;
+}
+
+.fontw500 {
+  font-weight: 500;
+}
+
+.fontw600 {
+  font-weight: 600;
+}
+
+.fontw700 {
+  font-weight: 700;
+}
+
+.fontw800 {
+  font-weight: 800;
+}
+
+.fontw900 {
+  font-weight: 900;
+}
+
+
+/* ==============
+   2. 文字省略
+   ============== */
+/* 圆角 50% */
+.radius-bai50 {
+  border-radius: 50%;
+}
+
+/* 单行省略 */
+.txtellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.txtellipsis1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 两行省略 */
+.txtellipsis2 {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* 三行省略 */
+.txtellipsis3 {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* flex 居中 */
+.txt-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ==============
+   3. 滚动条隐藏
+   ============== */
+/* 隐藏垂直滚动条 */
+.hide-scrollbar-y {
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+.hide-scrollbar-y::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, and Opera */
+}
+
+/* 隐藏水平滚动条 */
+.hide-scrollbar-x {
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+.hide-scrollbar-x::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, and Opera */
+}
+
+/* ==============
+   4. 交互控制
+   ============== */
+/* 鼠标禁用区域 */
+.disabled-area {
+  pointer-events: none;
+}
+
+/* 不允许复制 */
+.no-copy {
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
+}
+
+/* ==============
+   5. 百分比宽高(前缀 w-bai- / h-bai- / max-w-bai- / min-w-bai- 等)
+   ============== */
+/* 宽度百分比 */
+.w-bai-10 {
+  width: 10%;
+}
+
+.w-bai-20 {
+  width: 20%;
+}
+
+.w-bai-30 {
+  width: 30%;
+}
+
+.w-bai-33 {
+  width: 33%;
+}
+
+.w-bai-40 {
+  width: 40%;
+}
+
+.w-bai-50 {
+  width: 50%;
+}
+
+.w-bai-60 {
+  width: 60%;
+}
+
+.w-bai-70 {
+  width: 70%;
+}
+
+.w-bai-80 {
+  width: 80%;
+}
+
+.w-bai-90 {
+  width: 90%;
+}
+
+.w-bai-100 {
+  width: 100%;
+}
+
+/* 最大宽度百分比 */
+.max-w-bai-10 {
+  max-width: 10%;
+}
+
+.max-w-bai-20 {
+  max-width: 20%;
+}
+
+.max-w-bai-30 {
+  max-width: 30%;
+}
+
+.max-w-bai-40 {
+  max-width: 40%;
+}
+
+.max-w-bai-50 {
+  max-width: 50%;
+}
+
+.max-w-bai-60 {
+  max-width: 60%;
+}
+
+.max-w-bai-70 {
+  max-width: 70%;
+}
+
+.max-w-bai-80 {
+  max-width: 80%;
+}
+
+.max-w-bai-90 {
+  max-width: 90%;
+}
+
+.max-w-bai-100 {
+  max-width: 100%;
+}
+
+/* 最小宽度百分比 */
+.min-w-bai-10 {
+  min-width: 10%;
+}
+
+.min-w-bai-20 {
+  min-width: 20%;
+}
+
+.min-w-bai-30 {
+  min-width: 30%;
+}
+
+.min-w-bai-40 {
+  min-width: 40%;
+}
+
+.min-w-bai-50 {
+  min-width: 50%;
+}
+
+.min-w-bai-60 {
+  min-width: 60%;
+}
+
+.min-w-bai-70 {
+  min-width: 70%;
+}
+
+.min-w-bai-80 {
+  min-width: 80%;
+}
+
+.min-w-bai-90 {
+  min-width: 90%;
+}
+
+.min-w-bai-100 {
+  min-width: 100%;
+}
+
+/* 高度百分比 */
+.h-bai-10 {
+  height: 10%;
+}
+
+.h-bai-20 {
+  height: 20%;
+}
+
+.h-bai-30 {
+  height: 30%;
+}
+
+.h-bai-40 {
+  height: 40%;
+}
+
+.h-bai-50 {
+  height: 50%;
+}
+
+.h-bai-60 {
+  height: 60%;
+}
+
+.h-bai-70 {
+  height: 70%;
+}
+
+.h-bai-80 {
+  height: 80%;
+}
+
+.h-bai-90 {
+  height: 90%;
+}
+
+.h-bai-100 {
+  height: 100%;
+}
+
+/* 最大高度百分比 */
+.max-h-bai-10 {
+  max-height: 10%;
+}
+
+.max-h-bai-20 {
+  max-height: 20%;
+}
+
+.max-h-bai-30 {
+  max-height: 30%;
+}
+
+.max-h-bai-40 {
+  max-height: 40%;
+}
+
+.max-h-bai-50 {
+  max-height: 50%;
+}
+
+.max-h-bai-60 {
+  max-height: 60%;
+}
+
+.max-h-bai-70 {
+  max-height: 70%;
+}
+
+.max-h-bai-80 {
+  max-height: 80%;
+}
+
+.max-h-bai-90 {
+  max-height: 90%;
+}
+
+.max-h-bai-100 {
+  max-height: 100%;
+}
+
+/* 最小高度百分比 */
+.min-h-bai-10 {
+  min-height: 10%;
+}
+
+.min-h-bai-20 {
+  min-height: 20%;
+}
+
+.min-h-bai-30 {
+  min-height: 30%;
+}
+
+.min-h-bai-40 {
+  min-height: 40%;
+}
+
+.min-h-bai-50 {
+  min-height: 50%;
+}
+
+.min-h-bai-60 {
+  min-height: 60%;
+}
+
+.min-h-bai-70 {
+  min-height: 70%;
+}
+
+.min-h-bai-80 {
+  min-height: 80%;
+}
+
+.min-h-bai-90 {
+  min-height: 90%;
+}
+
+.min-h-bai-100 {
+  min-height: 100%;
+}
+
+/* ==============
+   6. 绝对定位居中
+   ============== */
+.absolutecenter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ==============
+   7. 其他自定义
+   ============== */
+/* 缩进 2 字符 */
+.text-indent-2em {
+  text-indent: 2em;
+}
+
+/* ==============
+   8. 自定义背景透明度系列(bg-{color}-{5~95})
+   ============== */
+/* 白色系列 */
+.bg-white-5 {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bg-white-10 {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.bg-white-15 {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.bg-white-20 {
+  background: rgba(255, 255, 255, 0.20);
+}
+
+.bg-white-25 {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.bg-white-30 {
+  background: rgba(255, 255, 255, 0.30);
+}
+
+.bg-white-35 {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.bg-white-40 {
+  background: rgba(255, 255, 255, 0.40);
+}
+
+.bg-white-45 {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.bg-white-50 {
+  background: rgba(255, 255, 255, 0.50);
+}
+
+.bg-white-55 {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.bg-white-60 {
+  background: rgba(255, 255, 255, 0.60);
+}
+
+.bg-white-65 {
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.bg-white-70 {
+  background: rgba(255, 255, 255, 0.70);
+}
+
+.bg-white-75 {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.bg-white-80 {
+  background: rgba(255, 255, 255, 0.80);
+}
+
+.bg-white-85 {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.bg-white-90 {
+  background: rgba(255, 255, 255, 0.90);
+}
+
+.bg-white-95 {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* 黑色系列 */
+.bg-black-5 {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.bg-black-10 {
+  background: rgba(0, 0, 0, 0.10);
+}
+
+.bg-black-15 {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.bg-black-20 {
+  background: rgba(0, 0, 0, 0.20);
+}
+
+.bg-black-25 {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.bg-black-30 {
+  background: rgba(0, 0, 0, 0.30);
+}
+
+.bg-black-35 {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.bg-black-40 {
+  background: rgba(0, 0, 0, 0.40);
+}
+
+.bg-black-45 {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.bg-black-50 {
+  background: rgba(0, 0, 0, 0.50);
+}
+
+.bg-black-55 {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.bg-black-60 {
+  background: rgba(0, 0, 0, 0.60);
+}
+
+.bg-black-65 {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.bg-black-70 {
+  background: rgba(0, 0, 0, 0.70);
+}
+
+.bg-black-75 {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.bg-black-80 {
+  background: rgba(0, 0, 0, 0.80);
+}
+
+.bg-black-85 {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.bg-black-90 {
+  background: rgba(0, 0, 0, 0.90);
+}
+
+.bg-black-95 {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+/* 紫色系列 */
+.bg-purple-5 {
+  background: rgba(147, 51, 234, 0.05);
+}
+
+.bg-purple-10 {
+  background: rgba(147, 51, 234, 0.10);
+}
+
+.bg-purple-15 {
+  background: rgba(147, 51, 234, 0.15);
+}
+
+.bg-purple-20 {
+  background: rgba(147, 51, 234, 0.20);
+}
+
+.bg-purple-25 {
+  background: rgba(147, 51, 234, 0.25);
+}
+
+.bg-purple-30 {
+  background: rgba(147, 51, 234, 0.30);
+}
+
+.bg-purple-35 {
+  background: rgba(147, 51, 234, 0.35);
+}
+
+.bg-purple-40 {
+  background: rgba(147, 51, 234, 0.40);
+}
+
+.bg-purple-45 {
+  background: rgba(147, 51, 234, 0.45);
+}
+
+.bg-purple-50 {
+  background: rgba(147, 51, 234, 0.50);
+}
+
+.bg-purple-55 {
+  background: rgba(147, 51, 234, 0.55);
+}
+
+.bg-purple-60 {
+  background: rgba(147, 51, 234, 0.60);
+}
+
+.bg-purple-65 {
+  background: rgba(147, 51, 234, 0.65);
+}
+
+.bg-purple-70 {
+  background: rgba(147, 51, 234, 0.70);
+}
+
+.bg-purple-75 {
+  background: rgba(147, 51, 234, 0.75);
+}
+
+.bg-purple-80 {
+  background: rgba(147, 51, 234, 0.80);
+}
+
+.bg-purple-85 {
+  background: rgba(147, 51, 234, 0.85);
+}
+
+.bg-purple-90 {
+  background: rgba(147, 51, 234, 0.90);
+}
+
+.bg-purple-95 {
+  background: rgba(147, 51, 234, 0.95);
+}
+
+/* 粉色系列 */
+.bg-pink-5 {
+  background: rgba(236, 72, 153, 0.05);
+}
+
+.bg-pink-10 {
+  background: rgba(236, 72, 153, 0.10);
+}
+
+.bg-pink-15 {
+  background: rgba(236, 72, 153, 0.15);
+}
+
+.bg-pink-20 {
+  background: rgba(236, 72, 153, 0.20);
+}
+
+.bg-pink-25 {
+  background: rgba(236, 72, 153, 0.25);
+}
+
+.bg-pink-30 {
+  background: rgba(236, 72, 153, 0.30);
+}
+
+.bg-pink-35 {
+  background: rgba(236, 72, 153, 0.35);
+}
+
+.bg-pink-40 {
+  background: rgba(236, 72, 153, 0.40);
+}
+
+.bg-pink-45 {
+  background: rgba(236, 72, 153, 0.45);
+}
+
+.bg-pink-50 {
+  background: rgba(236, 72, 153, 0.50);
+}
+
+.bg-pink-55 {
+  background: rgba(236, 72, 153, 0.55);
+}
+
+.bg-pink-60 {
+  background: rgba(236, 72, 153, 0.60);
+}
+
+.bg-pink-65 {
+  background: rgba(236, 72, 153, 0.65);
+}
+
+.bg-pink-70 {
+  background: rgba(236, 72, 153, 0.70);
+}
+
+.bg-pink-75 {
+  background: rgba(236, 72, 153, 0.75);
+}
+
+.bg-pink-80 {
+  background: rgba(236, 72, 153, 0.80);
+}
+
+.bg-pink-85 {
+  background: rgba(236, 72, 153, 0.85);
+}
+
+.bg-pink-90 {
+  background: rgba(236, 72, 153, 0.90);
+}
+
+.bg-pink-95 {
+  background: rgba(236, 72, 153, 0.95);
+}
+
+/* 红色系列 */
+.bg-red-5 {
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.bg-red-10 {
+  background: rgba(239, 68, 68, 0.10);
+}
+
+.bg-red-15 {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.bg-red-20 {
+  background: rgba(239, 68, 68, 0.20);
+}
+
+.bg-red-25 {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+.bg-red-30 {
+  background: rgba(239, 68, 68, 0.30);
+}
+
+.bg-red-35 {
+  background: rgba(239, 68, 68, 0.35);
+}
+
+.bg-red-40 {
+  background: rgba(239, 68, 68, 0.40);
+}
+
+.bg-red-45 {
+  background: rgba(239, 68, 68, 0.45);
+}
+
+.bg-red-50 {
+  background: rgba(239, 68, 68, 0.50);
+}
+
+.bg-red-55 {
+  background: rgba(239, 68, 68, 0.55);
+}
+
+.bg-red-60 {
+  background: rgba(239, 68, 68, 0.60);
+}
+
+.bg-red-65 {
+  background: rgba(239, 68, 68, 0.65);
+}
+
+.bg-red-70 {
+  background: rgba(239, 68, 68, 0.70);
+}
+
+.bg-red-75 {
+  background: rgba(239, 68, 68, 0.75);
+}
+
+.bg-red-80 {
+  background: rgba(239, 68, 68, 0.80);
+}
+
+.bg-red-85 {
+  background: rgba(239, 68, 68, 0.85);
+}
+
+.bg-red-90 {
+  background: rgba(239, 68, 68, 0.90);
+}
+
+.bg-red-95 {
+  background: rgba(239, 68, 68, 0.95);
+}
+
+/* 蓝色系列 */
+.bg-blue-5 {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.bg-blue-10 {
+  background: rgba(59, 130, 246, 0.10);
+}
+
+.bg-blue-15 {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+.bg-blue-20 {
+  background: rgba(59, 130, 246, 0.20);
+}
+
+.bg-blue-25 {
+  background: rgba(59, 130, 246, 0.25);
+}
+
+.bg-blue-30 {
+  background: rgba(59, 130, 246, 0.30);
+}
+
+.bg-blue-35 {
+  background: rgba(59, 130, 246, 0.35);
+}
+
+.bg-blue-40 {
+  background: rgba(59, 130, 246, 0.40);
+}
+
+.bg-blue-45 {
+  background: rgba(59, 130, 246, 0.45);
+}
+
+.bg-blue-50 {
+  background: rgba(59, 130, 246, 0.50);
+}
+
+.bg-blue-55 {
+  background: rgba(59, 130, 246, 0.55);
+}
+
+.bg-blue-60 {
+  background: rgba(59, 130, 246, 0.60);
+}
+
+.bg-blue-65 {
+  background: rgba(59, 130, 246, 0.65);
+}
+
+.bg-blue-70 {
+  background: rgba(59, 130, 246, 0.70);
+}
+
+.bg-blue-75 {
+  background: rgba(59, 130, 246, 0.75);
+}
+
+.bg-blue-80 {
+  background: rgba(59, 130, 246, 0.80);
+}
+
+.bg-blue-85 {
+  background: rgba(59, 130, 246, 0.85);
+}
+
+.bg-blue-90 {
+  background: rgba(59, 130, 246, 0.90);
+}
+
+.bg-blue-95 {
+  background: rgba(59, 130, 246, 0.95);
+}
+
+
+/* ==============
+   以下为与 tailwindcss 一致的样式
+   ============== */
+
+/* ------------
+   9. 文本控制
+   ------------ */
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+
+.break-all {
+  word-break: break-all;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* ------------
+   10. 宽高
+   ------------ */
+.w-auto {
+  width: auto;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+/* ------------
+   11. 背景
+   ------------ */
+.bg-white {
+  background: #fff;
+}
+
+.bg-cover {
+  background-size: 100% 100%;
+}
+
+/* ------------
+   12. 边框样式
+   ------------ */
+.border-solid {
+  border-style: solid;
+}
+
+.border-dashed {
+  border-style: dashed;
+}
+
+.border-dotted {
+  border-style: dotted;
+}
+
+.border-double {
+  border-style: double;
+}
+
+.border-hidden {
+  border-style: hidden;
+}
+
+.border-none {
+  border-style: none;
+}
+
+/* ------------
+   13. Flex 布局
+   ------------ */
+/* Flex 显示 */
+.flex {
+  display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+/* Flex 方向 */
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
+/* Flex 换行 */
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+/* Flex 属性 */
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+}
+
+.flex-initial {
+  flex: 0 1 auto;
+}
+
+.flex-none {
+  flex: none;
+}
+
+/* Flex Grow */
+.grow {
+  flex-grow: 1;
+}
+
+.grow-0 {
+  flex-grow: 0;
+}
+
+/* Flex Shrink */
+.shrink {
+  flex-shrink: 1;
+}
+
+.shrink-0 {
+  flex-shrink: 0;
+}
+
+/* ------------
+   14. Flex 对齐
+   ------------ */
+/* Justify Content */
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
+/* Align Items */
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-baseline {
+  align-items: baseline;
+}
+
+.items-stretch {
+  align-items: stretch;
+}
+
+/* Align Self */
+.self-auto {
+  align-self: auto;
+}
+
+.self-start {
+  align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
+.self-center {
+  align-self: center;
+}
+
+.self-stretch {
+  align-self: stretch;
+}
+
+.self-baseline {
+  align-self: baseline;
+}
+
+/* Align Content */
+.content-start {
+  align-content: flex-start;
+}
+
+.content-end {
+  align-content: flex-end;
+}
+
+.content-center {
+  align-content: center;
+}
+
+.content-between {
+  align-content: space-between;
+}
+
+.content-around {
+  align-content: space-around;
+}
+
+.content-evenly {
+  align-content: space-evenly;
+}
+
+/* Order */
+.order-first {
+  order: -9999;
+}
+
+.order-last {
+  order: 9999;
+}
+
+.order-none {
+  order: 0;
+}
+
+/* Place Content */
+.place-content-center {
+  place-content: center;
+}
+
+.place-content-start {
+  place-content: start;
+}
+
+.place-content-end {
+  place-content: end;
+}
+
+.place-content-between {
+  place-content: space-between;
+}
+
+.place-content-around {
+  place-content: space-around;
+}
+
+.place-content-evenly {
+  place-content: space-evenly;
+}
+
+.place-content-stretch {
+  place-content: stretch;
+}
+
+/* Place Items */
+.place-items-center {
+  place-items: center;
+}
+
+.place-items-start {
+  place-items: start;
+}
+
+.place-items-end {
+  place-items: end;
+}
+
+.place-items-stretch {
+  place-items: stretch;
+}
+
+/* Place Self */
+.place-self-center {
+  place-self: center;
+}
+
+.place-self-start {
+  place-self: start;
+}
+
+.place-self-end {
+  place-self: end;
+}
+
+.place-self-stretch {
+  place-self: stretch;
+}
+
+/* ------------
+   15. 溢出
+   ------------ */
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+/* -----16. 定位----- */
+/* 定位类型 */
+.static {
+  position: static;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.sticky {
+  position: sticky;
+}
+
+
+/* ------------
+   17. 层级
+   ------------ */
+/* z-index层级 */
+.z-0 {
+  z-index: 0;
+}
+
+.z-1 {
+  z-index: 1;
+}
+
+.z-2 {
+  z-index: 2;
+}
+
+.z-3 {
+  z-index: 3;
+}
+
+.z-4 {
+  z-index: 4;
+}
+
+.z-5 {
+  z-index: 5;
+}
+
+.z-6 {
+  z-index: 6;
+}
+
+.z-7 {
+  z-index: 7;
+}
+
+.z-8 {
+  z-index: 8;
+}
+
+.z-9 {
+  z-index: 9;
+}
+
+/* 负 z-index 值 */
+.z-minus-1 {
+  z-index: -1;
+}
+
+.z-minus-2 {
+  z-index: -2;
+}
+
+.z-minus-3 {
+  z-index: -3;
+}
+
+.z-minus-4 {
+  z-index: -4;
+}
+
+.z-minus-5 {
+  z-index: -5;
+}
+
+.z-minus-6 {
+  z-index: -6;
+}
+
+.z-minus-7 {
+  z-index: -7;
+}
+
+.z-minus-8 {
+  z-index: -8;
+}
+
+.z-minus-9 {
+  z-index: -9;
+}
+
+.z-minus-10 {
+  z-index: -10;
+}
+
+/* ------------
+   18. 鼠标
+   ------------ */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* ------------
+   19. 透明度
+   ------------ */
+.opacity-100 {
+  opacity: 1;
+}
+
+.opacity-60 {
+  opacity: 0.6;
+}

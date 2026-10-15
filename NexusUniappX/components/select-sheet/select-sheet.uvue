@@ -1,0 +1,107 @@
+<template>
+	<view class="mask" v-if="props.visible" @click="emit('close')">
+		<view class="sheet" @click.stop>
+			<view class="sheet-head">
+				<text class="sheet-title">{{props.title}}</text>
+				<view class="sheet-cancel" @click="emit('close')">
+					<text class="sheet-cancel-text">取消</text>
+				</view>
+			</view>
+			<scroll-view class="sheet-list" scroll-y="true">
+				<view class="sheet-item" v-for="(opt, index) in props.options" :key="index" @click="emit('select', opt)">
+					<text :class="opt.value == props.selected ? 'sheet-item-text-selected' : 'sheet-item-text'">{{opt.label}}</text>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+</template>
+
+<script setup lang="uts">
+	type SelectOption = {
+		label: string
+		value: string
+	}
+
+	const props = withDefaults(defineProps<{
+		visible: boolean
+		title: string
+		options: SelectOption[]
+		selected: string
+	}>(), {
+		visible: false,
+		title: '',
+		options: [] as SelectOption[],
+		selected: ''
+	})
+
+	const emit = defineEmits<{
+		(e: 'select', option: SelectOption): void
+		(e: 'close'): void
+	}>()
+</script>
+
+<style>
+	.mask {
+		position: fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.45);
+		z-index: 100;
+		justify-content: flex-end;
+	}
+	.sheet {
+		flex-direction: column;
+		background-color: #FFFFFF;
+		border-top-left-radius: 24rpx;
+		border-top-right-radius: 24rpx;
+		padding-bottom: 40rpx;
+	}
+	.sheet-head {
+		position: relative;
+		height: 96rpx;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		border-bottom-width: 1rpx;
+		border-bottom-style: solid;
+		border-bottom-color: #F0F2F6;
+	}
+	.sheet-title {
+		font-size: 30rpx;
+		font-weight: 600;
+		color: #303030;
+	}
+	.sheet-cancel {
+		position: absolute;
+		right: 32rpx;
+		top: 0;
+		height: 96rpx;
+		justify-content: center;
+	}
+	.sheet-cancel-text {
+		font-size: 26rpx;
+		color: #6B82B5;
+	}
+	.sheet-list {
+		height: 560rpx;
+	}
+	.sheet-item {
+		height: 96rpx;
+		justify-content: center;
+		padding-left: 48rpx;
+		border-bottom-width: 1rpx;
+		border-bottom-style: solid;
+		border-bottom-color: #F5F7FA;
+	}
+	.sheet-item-text {
+		font-size: 28rpx;
+		color: #303030;
+	}
+	.sheet-item-text-selected {
+		font-size: 28rpx;
+		color: #3576F4;
+		font-weight: 600;
+	}
+</style>

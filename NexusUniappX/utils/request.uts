@@ -1,0 +1,107 @@
+/**
+ * 通用请求封装
+ * 用法：
+ *   import { httpGet, httpPost } from '@/utils/request'
+ *   const data = await httpGet('/xxx/list')
+ *   const data = await httpPost('/xxx/submit', { name: '张三' })
+ * 说明：接口地址自动拼接 config 中的 API_BASE_URL。
+ */
+import { API_BASE_URL, REQUEST_TIMEOUT } from '../config/index'
+
+export interface RequestResult<T> {
+	code: number
+	msg: string
+	message: string
+	data: T
+}
+
+interface ResultMsg {
+	msg: string
+	message: string
+}
+
+// 成功状态码：兼容 RuoYi（200）与本项目 open 接口（0）
+function isSuccess(code: number): boolean {
+	return code == 200 || code == 0
+}
+
+function failMessage(result: ResultMsg): string {
+	// 返回信息优先从 res.message 中取，为空时再取 msg，都为空则用兜底文案
+	if (result.message != null && result.message != '') {
+		return result.message
+	}
+	if (result.msg != null && result.msg != '') {
+		return result.msg
+	}
+	return '请求失败'
+}
+
+export function httpGet<T>(url: string, data?: AnyObject | null): Promise<T> {
+	return new Promise<T>((resolve, reject) => {
+		uni.request({
+			url: API_BASE_URL + url,
+			method: 'GET',
+			data: data ? data : {},
+			timeout: REQUEST_TIMEOUT,
+			success: (res) => {
+				const result = res.data as RequestResult<T>
+				if (isSuccess(result.code)) {
+					resolve(result.data)
+				} else {
+					reject(new Error(failMessage(result)))
+				}
+			},
+			fail: (err) => {
+				reject(err)
+			}
+		})
+	})
+}
+
+export function httpPost<T>(url: string, data?: AnyObject | null): Promise<T> {
+	return new Promise<T>((resolve, reject) => {
+		uni.request({
+			url: API_BASE_URL + url,
+			method: 'POST',
+			data: data ? data : {},
+			timeout: REQUEST_TIMEOUT,
+			success: (res) => {
+				const result = res.data as RequestResult<T>
+				if (isSuccess(result.code)) {
+					resolve(result.data)
+				} else {
+					reject(new Error(failMessage(result)))
+				}
+			},
+			fail: (err) => {
+				reject(err)
+			}
+		})
+	})
+}
+
+/**
+ * POST 请求（返回完整响应体，含 code / msg / message / data）
+ * 用法：提交类接口需要读取后端返回的提示信息（message）时使用。
+ */
+export function httpPostRaw<T>(url: string, data?: AnyObject | null): Promise<RequestResult<T>> {
+	return new Promise<RequestResult<T>>((resolve, reject) => {
+		uni.request({
+			url: API_BASE_URL + url,
+			method: 'POST',
+			data: data ? data : {},
+			timeout: REQUEST_TIMEOUT,
+			success: (res) => {
+				const result = res.data as RequestResult<T>
+				if (isSuccess(result.code)) {
+					resolve(result)
+				} else {
+					reject(new Error(failMessage(result)))
+				}
+			},
+			fail: (err) => {
+				reject(err)
+			}
+		})
+	})
+}

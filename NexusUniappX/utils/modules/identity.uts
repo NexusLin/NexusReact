@@ -1,0 +1,8 @@
+/**
+ * 身份信息校验工具
+ */
+
+/** 大陆手机号是否合法 */
+export function isValidPhone(v: string = ''): boolean {
+	return /^1[3-9]\d{9}$/.test(v.trim())
+}
