@@ -1,0 +1,43 @@
+{
+  "name": "@taibai/shared",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "gen:types": "tsc -p tsconfig.build.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./index.js",
+      "require": "./index.js"
+    },
+    "./hooks": {
+      "types": "./types/hooks/index.d.ts",
+      "import": "./hooks/index.js",
+      "require": "./hooks/index.js"
+    },
+    "./hooks/*": {
+      "types": "./types/hooks/*.d.ts",
+      "import": "./hooks/*.js",
+      "require": "./hooks/*.js"
+    },
+    "./hooks/module/*": {
+      "types": "./types/hooks/module/*.d.ts",
+      "import": "./hooks/module/*.js",
+      "require": "./hooks/module/*.js"
+    },
+    "./styles/*": "./styles/*",
+    "./images/*": "./images/*",
+    "./svg/*": "./svg/*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.26.1",
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,28 @@
+name: Publish NexusShared
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      # 发布 @taibai/shared（依赖 npm Trusted Publishing 的 OIDC 认证，无需令牌）
+      - name: Publish @taibai/shared
+        working-directory: WebMonorepo/packages/taibai-shared
+        run: npm publish --registry=https://registry.npmjs.org --access public

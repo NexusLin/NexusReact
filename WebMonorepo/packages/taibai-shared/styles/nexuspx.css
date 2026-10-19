@@ -1,0 +1,210 @@
+/* =========================================================
+   nexus 自研 px 原子化样式库（带具体像素尺寸的工具类）
+   /nexus-monorepo/packages/shared/styles/nexuspx.css
+
+   说明：本文件为带 px 尺寸的原子化工具类，
+   类名与属性值保持稳定，勿随意增删；格式统一为单行。
+
+   目录
+   ---------------------------------------------------------
+   01. 字体大小（font-*）
+   02. 行高（lineht-*）
+   03. 宽度（wd-*）
+   04. 高度（ht-*）
+   05. 内边距（pad-*）
+   06. 外边距（mg-*）
+   07. 间距（gap-*）
+   08. 圆角（radius-*）
+   09. 边框宽度（border-*，类名与 tailwindcss 同名，值一致）
+   ========================================================= */
+
+
+/* ====== 01. 字体大小 ====== */
+.font08 { font-size: 8px; }
+.font10 { font-size: 10px; }
+.font12 { font-size: 12px; }
+.font13 { font-size: 13px; }
+.font14 { font-size: 14px; }
+.font16 { font-size: 16px; }
+.font18 { font-size: 18px; }
+.font20 { font-size: 20px; }
+.font24 { font-size: 24px; }
+.font26 { font-size: 26px; }
+.font30 { font-size: 30px; }
+.font44 { font-size: 44px; }
+
+
+/* ====== 02. 行高 ====== */
+.lineht20 { line-height: 20px; }
+.lineht24 { line-height: 24px !important; }
+.lineht28 { line-height: 28px; }
+.lineht30 { line-height: 30px; }
+.lineht40 { line-height: 40px; }
+.lineht60 { line-height: 60px; }
+
+
+/* ====== 03. 宽度 ====== */
+.wd8 { width: 8px; }
+.wd10 { width: 10px; }
+.wd20 { width: 20px; }
+.wd30 { width: 30px; }
+.wd40 { width: 40px; }
+.wd50 { width: 50px; }
+.wd60 { width: 60px; }
+.wd70 { width: 70px; }
+.wd80 { width: 80px; }
+.wd90 { width: 90px; }
+.wd100 { width: 100px; }
+.wd120 { width: 120px; }
+.wd160 { width: 160px; }
+.wd200 { width: 200px; }
+.wd250 { width: 250px; }
+.wd300 { width: 300px; }
+.wd360 { width: 360px; }
+.wd400 { width: 400px; }
+.wd450 { width: 450px; }
+.wd500 { width: 500px; }
+.wd550 { width: 550px; }
+.wd600 { width: 600px; }
+
+
+/* ====== 04. 高度 ====== */
+.ht10 { height: 10px; }
+.ht20 { height: 20px; }
+.ht30 { height: 30px; }
+.ht36 { height: 36px; }
+.ht40 { height: 40px; }
+.ht50 { height: 50px; }
+.ht60 { height: 60px; }
+.ht70 { height: 70px; }
+.ht80 { height: 80px; }
+.ht90 { height: 90px; }
+.ht100 { height: 100px; }
+.ht120 { height: 120px; }
+.ht160 { height: 160px; }
+.ht200 { height: 200px; }
+.ht250 { height: 250px; }
+.ht300 { height: 300px; }
+.ht360 { height: 360px; }
+.ht400 { height: 400px; }
+.ht450 { height: 450px; }
+.ht500 { height: 500px; }
+.ht550 { height: 550px; }
+.ht600 { height: 600px; }
+
+
+/* ====== 05. 内边距 ====== */
+/* 通用 */
+.pad05 { padding: 5px; }
+.pad08 { padding: 8px; }
+.pad10 { padding: 10px; box-sizing: border-box; }
+.pad20 { padding: 20px; box-sizing: border-box; overflow: hidden; }
+/* 水平（左右） */
+.padx10 { padding-left: 10px; padding-right: 10px; }
+.padx15 { padding-left: 10px; padding-right: 10px; }
+.padx20 { padding-left: 20px; padding-right: 20px; }
+.padx40 { padding-left: 40px; padding-right: 40px; }
+/* 垂直（上下） */
+.pady6 { padding-top: 6px; padding-bottom: 6px; }
+.pady10 { padding-top: 10px; padding-bottom: 10px; }
+.pady20 { padding-top: 20px; padding-bottom: 20px; }
+.pady40 { padding-top: 40px; padding-bottom: 40px; }
+/* 单边 */
+.padtop20 { padding-top: 20px; }
+.padbot20 { padding-bottom: 20px; }
+.padl5 { padding-left: 5px; }
+.padl20 { padding-left: 20px; }
+.padr20 { padding-right: 20px; }
+
+
+/* ====== 06. 外边距 ====== */
+/* 通用 */
+.mg0 { margin: 0px; }
+.mg10 { margin: 10px; }
+.mg20 { margin: 20px; }
+.mg40 { margin: 40px; }
+/* 水平（左右） */
+.mgx0 { margin-left: 0px; margin-right: 0px; }
+.mgx10 { margin-left: 10px; margin-right: 10px; }
+.mgx20 { margin-left: 20px; margin-right: 20px; }
+.mgx40 { margin-left: 40px; margin-right: 40px; }
+/* 垂直（上下） */
+.mgy0 { margin-top: 0px; margin-bottom: 0px; }
+.mgy10 { margin-top: 10px; margin-bottom: 10px; }
+.mgy20 { margin-top: 20px; margin-bottom: 20px; }
+.mgy40 { margin-top: 40px; margin-bottom: 40px; }
+/* 上 */
+.mgtp10 { margin-top: 10px; }
+.mgtp20 { margin-top: 20px; }
+/* 下 */
+.mgbt10 { margin-bottom: 10px; }
+.mgbt20 { margin-bottom: 20px; }
+.mgbt40 { margin-bottom: 40px; }
+/* 左 */
+.mglf0 { margin-left: 0px; }
+.mglf10 { margin-left: 10px; }
+.mglf20 { margin-left: 20px; }
+.mglf40 { margin-left: 40px; }
+/* 右 */
+.mgrt0 { margin-right: 0px; }
+.mgrt10 { margin-right: 10px; }
+.mgrt20 { margin-right: 20px; }
+.mgrt40 { margin-right: 40px; }
+
+
+/* ====== 07. 间距 ====== */
+.gap2 { gap: 2px; }
+
+
+/* ====== 08. 圆角 ====== */
+.radius2 { border-radius: 2px; }
+.radius4 { border-radius: 4px; }
+.radius6 { border-radius: 6px; }
+.radius8 { border-radius: 8px; }
+.radius10 { border-radius: 10px; }
+.radius20 { border-radius: 20px; }
+
+
+/* ====== 09. 边框宽度 ====== */
+/* 通用 */
+.border-0 { border-width: 0px; }
+.border-1 { border-width: 1px; }
+.border-2 { border-width: 2px; }
+.border-4 { border-width: 4px; }
+.border-8 { border-width: 8px; }
+/* 上 */
+.border-t-0 { border-top-width: 0px; }
+.border-t-1 { border-top-width: 1px; }
+.border-t-2 { border-top-width: 2px; }
+.border-t-4 { border-top-width: 4px; }
+.border-t-8 { border-top-width: 8px; }
+/* 右 */
+.border-r-0 { border-right-width: 0px; }
+.border-r-1 { border-right-width: 1px; }
+.border-r-2 { border-right-width: 2px; }
+.border-r-4 { border-right-width: 4px; }
+.border-r-8 { border-right-width: 8px; }
+/* 下 */
+.border-b-0 { border-bottom-width: 0px; }
+.border-b-1 { border-bottom-width: 1px; }
+.border-b-2 { border-bottom-width: 2px; }
+.border-b-4 { border-bottom-width: 4px; }
+.border-b-8 { border-bottom-width: 8px; }
+/* 左 */
+.border-l-0 { border-left-width: 0px; }
+.border-l-1 { border-left-width: 1px; }
+.border-l-2 { border-left-width: 2px; }
+.border-l-4 { border-left-width: 4px; }
+.border-l-8 { border-left-width: 8px; }
+/* 水平（左右） */
+.border-x-0 { border-left-width: 0px; border-right-width: 0px; }
+.border-x-1 { border-left-width: 1px; border-right-width: 1px; }
+.border-x-2 { border-left-width: 2px; border-right-width: 2px; }
+.border-x-4 { border-left-width: 4px; border-right-width: 4px; }
+.border-x-8 { border-left-width: 8px; border-right-width: 8px; }
+/* 垂直（上下） */
+.border-y-0 { border-top-width: 0px; border-bottom-width: 0px; }
+.border-y-1 { border-top-width: 1px; border-bottom-width: 1px; }
+.border-y-2 { border-top-width: 2px; border-bottom-width: 2px; }
+.border-y-4 { border-top-width: 4px; border-bottom-width: 4px; }
+.border-y-8 { border-top-width: 8px; border-bottom-width: 8px; }

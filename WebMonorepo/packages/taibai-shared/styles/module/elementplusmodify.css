@@ -1,0 +1,7 @@
+/* 针对elementplus模块样式的修改 */
+
+/* elemenplus弹窗处理 */
+/* https://github.com/ElemeFE/element/issues/2461 */
+.el-dialog {
+  transform: none !important;
+}

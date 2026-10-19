@@ -1,0 +1,128 @@
+/* ==============
+   nexus rem 原子化样式
+   ==============
+   基准:html font-size 为 100px(0.01rem = 1px)
+   说明:以这个为最新样式库 /nexus-monorepo/packages/shared
+   ==============
+   目录:
+   1. 字体大小(font08 ~ font44)
+   2. 行高(lineht20 ~ lineht60)
+   3. 内边距(pad / padx / pady / padtop / padbot / padl / padr)
+   4. 外边距(mg / mgbt / mgrt)
+   5. 间距(gap / gap-x / gap-y)
+   6. 圆角(redius10 ~ redius20)
+   ============== */
+
+
+/* --------
+   1. 字体大小
+   -------- */
+.font08 { font-size: 0.08rem; }
+.font10 { font-size: 0.1rem; }
+.font12 { font-size: 0.12rem; }
+.font13 { font-size: 0.13rem; }
+.font14 { font-size: 0.14rem; }
+.font16 { font-size: 0.16rem; }
+.font18 { font-size: 0.18rem; }
+.font20 { font-size: 0.2rem; }
+.font24 { font-size: 0.24rem; }
+.font26 { font-size: 0.26rem; }
+.font28 { font-size: 0.28rem; }
+.font30 { font-size: 0.3rem; }
+.font32 { font-size: 0.32rem; }
+.font36 { font-size: 0.36rem; }
+.font40 { font-size: 0.4rem; }
+.font44 { font-size: 0.44rem; }
+
+/* --------
+   2. 行高
+   -------- */
+.lineht20 { line-height: 0.2rem; }
+.lineht24 { line-height: 0.24rem; }
+.lineht28 { line-height: 0.28rem; }
+.lineht30 { line-height: 0.3rem; }
+.lineht32 { line-height: 0.32rem; }
+.lineht48 { line-height: 0.48rem; }
+.lineht60 { line-height: 0.6rem; }
+
+/* --------
+   3. 内边距
+   -------- */
+/* 通用内边距 */
+.pad05 { padding: 0.05rem; }
+.pad10 {
+  padding: 0.1rem;
+  box-sizing: border-box;
+}
+.pad20 {
+  padding: 0.2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* 水平内边距 */
+.padx20 { padding-left: 0.2rem; padding-right: 0.2rem; }
+
+/* 垂直内边距 */
+.pady10 { padding-top: 0.1rem; padding-bottom: 0.1rem; }
+.pady20 { padding-top: 0.2rem; padding-bottom: 0.2rem; }
+
+/* 上内边距 */
+.padtop20 { padding-top: 0.2rem; }
+
+/* 下内边距 */
+.padbot20 { padding-bottom: 0.2rem; }
+
+/* 左内边距 */
+.padl10 { padding-left: 0.1rem; }
+.padl20 { padding-left: 0.2rem; }
+
+/* 右内边距 */
+.padr10 { padding-right: 0.1rem; }
+.padr20 { padding-right: 0.2rem; }
+
+/* --------
+   4. 外边距
+   -------- */
+/* 通用外边距 */
+.mg20 { margin: 0.2rem; }
+
+/* 下外边距 */
+.mgbt04 { margin-bottom: 0.04rem; }
+.mgbt06 { margin-bottom: 0.06rem; }
+.mgbt08 { margin-bottom: 0.08rem; }
+.mgbt10 { margin-bottom: 0.1rem; }
+.mgbt20 { margin-bottom: 0.2rem; }
+.mgbt40 { margin-bottom: 0.4rem; }
+
+/* 右外边距 */
+.mgrt05 { margin-right: 0.05rem; }
+.mgrt10 { margin-right: 0.1rem; }
+.mgrt20 { margin-right: 0.2rem; }
+.mgrt40 { margin-right: 0.4rem; }
+
+/* --------
+   5. 间距
+   -------- */
+/* 通用间距 */
+.gap10 { gap: 0.1rem; }
+.gap20 { gap: 0.2rem; }
+
+/* 水平间距 */
+.gap-x-10 { gap: 0 0.1rem; }
+.gap-x-20 { gap: 0 0.2rem; }
+
+/* 垂直间距 */
+.gap-y-20 { gap: 0.2rem 0; }
+
+/* --------
+   6. 圆角
+   -------- */
+.redius10 {
+  border-radius: 0.1rem;
+  box-sizing: border-box;
+}
+.redius20 {
+  border-radius: 0.2rem;
+  box-sizing: border-box;
+}

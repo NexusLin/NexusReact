@@ -1,0 +1,233 @@
+/* ==============
+   nexus rpx 原子化样式(uniapp 部分)
+   ==============
+   基准:1rpx = 1px
+   说明:以这个为最新样式库 /nexus-monorepo/packages/shared
+   ==============
+   目录:
+   1. 字体大小(font08 ~ font44)
+   2. 行高(lineht20 ~ lineht30)
+   3. 内边距(pad / padx / pady / padtp / padbt / padlf / padrt)
+   4. 外边距(mgtp / mgbt)
+   5. 间距(gap)
+   6. 圆角(radius04 ~ radius30)
+   ============== */
+/* --------
+   1. 字体大小
+   -------- */
+.font08 { font-size: 8rpx; }
+.font10 { font-size: 10rpx; }
+.font13 { font-size: 13rpx; }
+.font14 { font-size: 14rpx; }
+.font16 { font-size: 16rpx; }
+.font18 { font-size: 18rpx; }
+.font20 { font-size: 20rpx; }
+.font24 { font-size: 24rpx; }
+.font26 { font-size: 26rpx; }
+.font28 { font-size: 28rpx; }
+.font30 { font-size: 30rpx; }
+.font32 { font-size: 32rpx; }
+.font34 { font-size: 34rpx; }
+.font44 { font-size: 44rpx; }
+
+/* --------
+   2. 行高
+   -------- */
+.lineht20 { line-height: 20rpx; }
+.lineht24 { line-height: 24rpx; }
+.lineht28 { line-height: 28rpx; }
+.lineht30 { line-height: 30rpx; }
+
+/* --------
+   3. 宽度和高度
+   -------- */
+.wd10 { width: 10rpx; }
+.wd20 { width: 20rpx; }
+.wd30 { width: 30rpx; }
+.wd40 { width: 40rpx; }
+.wd50 { width: 50rpx; }
+.wd60 { width: 60rpx; }
+.wd70 { width: 70rpx; }
+.wd80 { width: 80rpx; }
+.wd90 { width: 90rpx; }
+.wd100 { width: 100rpx; }
+.wd110 { width: 110rpx; }
+.wd120 { width: 120rpx; }
+.wd130 { width: 130rpx; }
+.wd140 { width: 140rpx; }
+.wd150 { width: 150rpx; }
+.wd160 { width: 160rpx; }
+.wd180 { width: 180rpx; }
+.wd200 { width: 200rpx; }
+.wd220 { width: 220rpx; }
+.wd250 { width: 250rpx; }
+.wd280 { width: 280rpx; }
+.wd300 { width: 300rpx; }
+.wd320 { width: 320rpx; }
+.wd350 { width: 350rpx; }
+.wd360 { width: 360rpx; }
+.wd400 { width: 400rpx; }
+.wd450 { width: 450rpx; }
+.wd480 { width: 480rpx; }
+.wd500 { width: 500rpx; }
+.wd550 { width: 550rpx; }
+.wd600 { width: 600rpx; }
+.wd720 { width: 720rpx; }
+.wd800 { width: 800rpx; }
+
+.ht10 { height: 10rpx; }
+.ht20 { height: 20rpx; }
+.ht30 { height: 30rpx; }
+.ht40 { height: 40rpx; }
+.ht50 { height: 50rpx; }
+.ht60 { height: 60rpx; }
+.ht70 { height: 70rpx; }
+.ht80 { height: 80rpx; }
+.ht88 { height: 88rpx; }
+.ht90 { height: 90rpx; }
+.ht100 { height: 100rpx; }
+.ht110 { height: 110rpx; }
+.ht120 { height: 120rpx; }
+.ht130 { height: 130rpx; }
+.ht140 { height: 140rpx; }
+.ht150 { height: 150rpx; }
+.ht160 { height: 160rpx; }
+.ht180 { height: 180rpx; }
+.ht200 { height: 200rpx; }
+.ht220 { height: 220rpx; }
+.ht250 { height: 250rpx; }
+.ht280 { height: 280rpx; }
+.ht300 { height: 300rpx; }
+.ht320 { height: 320rpx; }
+.ht350 { height: 350rpx; }
+.ht360 { height: 360rpx; }
+.ht400 { height: 400rpx; }
+.ht450 { height: 450rpx; }
+.ht480 { height: 480rpx; }
+.ht500 { height: 500rpx; }
+.ht550 { height: 550rpx; }
+.ht600 { height: 600rpx; }
+.ht720 { height: 720rpx; }
+.ht800 { height: 800rpx; }
+
+/* --------
+   4. 内边距
+   -------- */
+/* 通用内边距 */
+.pad0 { padding: 0; box-sizing: border-box; }
+.pad10 { padding: 10rpx; box-sizing: border-box; }
+.pad12 { padding: 12rpx; box-sizing: border-box; }
+.pad16 { padding: 16rpx; box-sizing: border-box; }
+.pad20 { padding: 20rpx; box-sizing: border-box; }
+.pad24 { padding: 24rpx; box-sizing: border-box; }
+.pad28 { padding: 28rpx; box-sizing: border-box; }
+.pad30 { padding: 30rpx; box-sizing: border-box; }
+.pad32 { padding: 32rpx; box-sizing: border-box; }
+.pad36 { padding: 36rpx; box-sizing: border-box; }
+.pad40 { padding: 40rpx; box-sizing: border-box; }
+
+
+/* 水平内边距 */
+.padx08 { padding-left: 8rpx; padding-right: 8rpx; }
+.padx10 { padding-left: 10rpx; padding-right: 10rpx; }
+.padx20 { padding-left: 20rpx; padding-right: 20rpx; }
+.padx28 { padding-left: 28rpx; padding-right: 28rpx; }
+.padx30 { padding-left: 30rpx; padding-right: 30rpx; }
+
+/* 垂直内边距 */
+.pady10 { padding-top: 10rpx; padding-bottom: 10rpx; }
+.pady20 { padding-top: 20rpx; padding-bottom: 20rpx; }
+.pady28 { padding-top: 28rpx; padding-bottom: 28rpx; }
+.pady30 { padding-top: 30rpx; padding-bottom: 30rpx; }
+
+/* 上内边距 */
+.padtp08 { padding-top: 8rpx; }
+.padtp10 { padding-top: 10rpx; }
+.padtp20 { padding-top: 20rpx; }
+.padtp28 { padding-top: 28rpx; }
+.padtp30 { padding-top: 30rpx; }
+
+/* 下内边距 */
+.padbt08 { padding-bottom: 8rpx; }
+.padbt10 { padding-bottom: 10rpx; }
+.padbt20 { padding-bottom: 20rpx; }
+.padbt28 { padding-bottom: 28rpx; }
+.padbt30 { padding-bottom: 30rpx; }
+
+/* 左内边距 */
+.padlf08 { padding-left: 8rpx; }
+.padlf10 { padding-left: 10rpx; }
+.padlf20 { padding-left: 20rpx; }
+.padlf28 { padding-left: 28rpx; }
+.padlf30 { padding-left: 30rpx; }
+
+/* 右内边距 */
+.padrt08 { padding-right: 8rpx; }
+.padrt10 { padding-right: 10rpx; }
+.padrt20 { padding-right: 20rpx; }
+.padrt28 { padding-right: 28rpx; }
+.padrt30 { padding-right: 30rpx; }
+
+/* --------
+   4. 外边距
+   -------- */
+/* 上外边距 */
+.mgtp08 { margin-top: 8rpx; }
+.mgtp10 { margin-top: 10rpx; }
+.mgtp16 { margin-top: 16rpx; }
+.mgtp20 { margin-top: 20rpx; }
+.mgtp40 { margin-top: 40rpx; }
+
+/* 下外边距 */
+.mgbt08 { margin-bottom: 8rpx; }
+.mgbt10 { margin-bottom: 10rpx; }
+.mgbt16 { margin-bottom: 16rpx; }
+.mgbt20 { margin-bottom: 20rpx; }
+.mgbt40 { margin-bottom: 40rpx; }
+
+/* --------
+   5. 间距
+   -------- */
+/* 极小间距 */
+.gap4 { gap: 4rpx; }
+.gap8 { gap: 8rpx; }
+.gap10 { gap: 10rpx; }
+/* 常规小间距 */
+.gap12 { gap: 12rpx; }
+.gap16 { gap: 16rpx; }
+.gap20 { gap: 20rpx; }
+.gap24 { gap: 24rpx; }
+
+/* 常规中间距 */
+.gap28 { gap: 28rpx; }
+.gap30 { gap: 30rpx; }
+.gap32 { gap: 32rpx; }
+
+/* 常规大间距 */
+.gap36 { gap: 36rpx; }
+.gap40 { gap: 40rpx; }
+.gap48 { gap: 48rpx; }
+
+/* 较大间距 */
+.gap56 { gap: 56rpx; }
+.gap64 { gap: 64rpx; }
+
+/* --------
+   6. 圆角
+   -------- */
+/* 通用圆角 */
+.radius0 { border-radius: 0; }
+.radius04 { border-radius: 4rpx; }
+.radius06 { border-radius: 6rpx; }
+.radius08 { border-radius: 8rpx; }
+.radius10 { border-radius: 10rpx; }
+.radius12 { border-radius: 12rpx; }
+.radius16 { border-radius: 16rpx; }
+.radius20 { border-radius: 20rpx; }
+.radius24 { border-radius: 24rpx; }
+.radius26 { border-radius: 26rpx; }
+.radius28  { border-radius: 28rpx; }
+.radius30 { border-radius: 30rpx; }
+.radius32 { border-radius: 32rpx; }
+.radius999 { border-radius: 999rpx; }
+.radius50 { border-radius: 50%; }

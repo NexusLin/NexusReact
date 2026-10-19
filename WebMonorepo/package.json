@@ -1,0 +1,36 @@
+{
+  "name": "nexus-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Nexus Monorepo managed by pnpm",
+  "scripts": {
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "dev:react": "pnpm --filter nexus-react-shadcn dev",
+    "dev:reactantd": "pnpm --filter nexus-react-antd dev",
+    "dev:vue2": "pnpm --filter nexus-vue2 serve",
+    "dev:vue3": "pnpm --filter nexus-vue3 dev",
+    "dev:vue": "pnpm --filter nexusvue3js dev",
+    "dev:apinest": "pnpm --filter nexus-api-nest dev",
+    "dev": "pnpm -r --parallel dev",
+    "build:react": "pnpm --filter nexus-react-shadcn build",
+    "build:reactantd": "pnpm --filter nexus-react-antd build",
+    "build:vue2": "pnpm --filter nexus-vue2 build",
+    "build:vue3": "pnpm --filter nexus-vue3 build",
+    "build:vue": "pnpm --filter nexusvue3js build",
+    "build:all": "pnpm -r build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.26.1",
+  "dependencies": {
+    "eslint": "^9.39.2",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.3"
+  }
+}

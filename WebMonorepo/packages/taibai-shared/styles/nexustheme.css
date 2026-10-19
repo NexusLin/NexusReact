@@ -1,0 +1,79 @@
+/* 主题样式 */
+:root {
+  /* 主题色 */
+  --theme-color: #409eff;
+  /* 背景色 */
+  --theme-bg-white:#fff;
+  --theme-light-color:#F2F7FF;
+  /* 字体颜色 */
+  --theme-font-color: #409eff;
+
+  /* 按钮组件颜色变量(shadcn 6 语义变体 + 焦点环) */
+  /* default:主操作(实色) */
+  --btn-default: #409eff;
+  --btn-default-foreground: #ffffff;
+  --btn-default-hover: #3a8fe6;
+  --btn-default-active: #3580d6;
+  /* secondary:次要(浅灰底) */
+  --btn-secondary: #f0f2f5;
+  --btn-secondary-foreground: #333333;
+  --btn-secondary-hover: #e4e7ed;
+  /* destructive:危险(实色红) */
+  --btn-destructive: #f56c6c;
+  --btn-destructive-foreground: #ffffff;
+  --btn-destructive-hover: #dd5b5b;
+  /* outline:描边 */
+  --btn-outline: #ffffff;
+  --btn-outline-foreground: #606266;
+  --btn-outline-border: #dcdfe6;
+  --btn-outline-hover: #f7f8fa;
+  /* ghost:幽灵(透明,hover 出底) */
+  --btn-ghost-foreground: #606266;
+  --btn-ghost-hover: #f2f3f5;
+  /* link:链接(纯文字) */
+  --btn-link-foreground: #409eff;
+  /* 焦点环(shadcn: ring + ring-offset) */
+  --btn-ring: #409eff;
+  --btn-ring-offset: #ffffff;
+}
+
+/* 暗黑主题 */
+html.dark {
+  /* 主题色 */
+  --theme-color: #141414;
+  /* 背景色 */
+  --theme-bg-white:#141414;
+  --theme-light-color:rgba(255, 255, 255, 0.1);
+  /* 字体颜色 */
+  --theme-font-color: #fff;
+
+  /* 按钮:暗色覆盖(实色 default/destructive 在深色背景上仍可读,不覆盖) */
+  --btn-secondary: rgba(255, 255, 255, 0.10);
+  --btn-secondary-foreground: #ffffff;
+  --btn-secondary-hover: rgba(255, 255, 255, 0.15);
+  --btn-outline: #1d1e22;
+  --btn-outline-foreground: #e5eaf3;
+  --btn-outline-border: #414243;
+  --btn-outline-hover: #2a2b2f;
+  --btn-ghost-foreground: #e5eaf3;
+  --btn-ghost-hover: rgba(255, 255, 255, 0.08);
+  --btn-ring-offset: #1d1e22;
+}
+
+/* 主题配置 */
+/* 常用全局样式 */
+
+/* 主题背景色 */
+.theme-back-deep {
+  background-color: var(--theme-color);
+}
+.theme-back-light {
+  background-color: var(--theme-light-color);
+}
+.bg-white {
+  background-color: var(--theme-bg-white);
+}
+/* 主题字体颜色 */
+.theme-font-color{
+  color: var(--theme-font-color);
+}

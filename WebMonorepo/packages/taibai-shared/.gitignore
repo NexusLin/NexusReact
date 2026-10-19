@@ -1,0 +1,8 @@
+node_modules
+*.log
+.DS_Store
+
+# tsc 中间文件
+*.tsbuildinfo
+
+# 不要忽略 types/ 目录(.d.ts 需要提交,供消费方使用)

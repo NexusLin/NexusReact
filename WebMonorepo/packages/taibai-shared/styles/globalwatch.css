@@ -1,0 +1,15 @@
+/* theme-地铁手表样式颜色 */
+/* 主题按钮正常 */
+.theme-btn-normal{
+  background: rgba(255, 255, 255, 0.44);
+  color: #333333;
+}
+/* 主题按钮深色 */
+.theme-btn-act{
+  background: #305BF3;
+  color: #fff;
+}
+/* Emerald (祖母绿) */
+.theme-back-emerald{
+  background: #009A6D;
+}
